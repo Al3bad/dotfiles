@@ -1,0 +1,5 @@
+VBoxClient --clipboard
+VBoxClient --seamless
+VBoxClient --vmsvga
+
+exec awesome

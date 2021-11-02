@@ -18,6 +18,18 @@ local _M = {}
 
 -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
 
+function focus_client() 
+    -- Get selected tag
+    local current_tag = awful.screen.focused().selected_tag
+    -- Get all clients in the current tag
+    local clients = current_tag:clients()
+    -- If there is a clients in the in the current tag, focus on the first one
+    for i in pairs(clients) do 
+        client.focus = clients[i]
+        break;
+    end
+end
+
 function _M.get()
   local globalkeys = gears.table.join(
     awful.key({ modkey,           }, "s",      hotkeys_popup.show_help,
@@ -25,9 +37,17 @@ function _M.get()
 
     --   -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
     -- Tag browsing
-    awful.key({ modkey,           }, "Left",   awful.tag.viewprev,
+    awful.key({ modkey,           }, "Left", 
+        function()
+            awful.tag.viewprev()
+            focus_client()
+        end,
               {description = "view previous", group = "tag"}),
-    awful.key({ modkey,           }, "Right",  awful.tag.viewnext,
+    awful.key({ modkey,           }, "Right",
+        function()
+            awful.tag.viewnext()
+            focus_client()
+        end,
               {description = "view next", group = "tag"}),
     awful.key({ modkey,           }, "Escape", awful.tag.history.restore,
               {description = "go back", group = "tag"}),

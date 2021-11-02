@@ -36,6 +36,24 @@ client.connect_signal("manage", function (c)
 end)
 
 -------------------------------------------------
+--> Signal when a client is distroyed
+-------------------------------------------------
+function focus_client() 
+    -- Get selected tag
+    local current_tag = awful.screen.focused().selected_tag
+    -- Get all clients in the current tag
+    local clients = current_tag:clients()
+    -- If there is a clients in the in the current tag, focus on the first one
+    for i in pairs(clients) do 
+        client.focus = clients[i]
+        break;
+    end
+end
+
+client.connect_signal("unmanage", focus_client)
+
+
+-------------------------------------------------
 --> Sloppy focus: Focus follows mouse
 -------------------------------------------------
 -- client.connect_signal("mouse::enter", function(c)

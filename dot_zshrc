@@ -6,6 +6,15 @@ export ZSH="${HOME}/.config/zsh"                            # ZSH configuration 
 source ${ZSH}/.zshenv
 
 #################################################
+# --> NeoFetch
+#################################################
+
+if command -v neofetch &> /dev/null
+then
+    neofetch
+fi
+
+#################################################
 # --> Eanble PowerLevel10k instant prompt
 #################################################
 
@@ -30,4 +39,5 @@ source ${ZSH}/plugins/powerlevel10k.plugin.zsh
 #################################################
 
 source ${ZSH}/aliases.zsh
+
 

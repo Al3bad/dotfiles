@@ -12,29 +12,23 @@ set expandtab tabstop=4 shiftwidth=4
 set background=dark
 set clipboard=unnamedplus
 
+if has("unix")
+  let s:uname = system("uname -s")
+  " Do Mac stuff
+  if s:uname == "Darwin\n"
+    let g:python3_host_prog = '/usr/local/bin/python3'
+  endif
+endif
 
-call plug#begin(stdpath("data") . "/plugged")
+call plug#begin(stdpath('config') . '/plugged')
 Plug 'preservim/nerdtree'
 Plug 'Xuyuanp/nerdtree-git-plugin'
 Plug 'ryanoasis/vim-devicons'
 Plug 'vimsence/vimsence'
 Plug 'chrisbra/Colorizer'
+Plug 'tpope/vim-commentary'
 call plug#end()
 
 lua << EOF
--- Comment plugin    
-require("nvim_comment").setup({
-  -- Linters prefer comment and line to have a space in between markers
-  marker_padding = true,
-  -- should comment out empty or whitespace only lines
-  comment_empty = true,
-  -- Should key mappings be created
-  create_mappings = true,
-  -- Normal mode mapping left hand side
-  line_mapping = "<C-_>", -- key binding for Ctrl + /
-  -- Visual/Operator mapping left hand side
-  operator_mapping = "gc",
-  -- Hook function to call before commenting takes place
-  hook = nil
-})
+
 EOF

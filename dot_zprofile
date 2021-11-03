@@ -1,5 +1,5 @@
 # Execute this block of on Arch Linux
-if [[ "$(hostnamectl | grep "Operating System:" | cut -d ':' -f2 | tr -d " ")" == "ArchLinux" ]]
+if [[ "$(hostnamectl | grep "Operating System:" | cut -d ':' -f2 | tr -d " ")" == "ArchLinux" ]]; then
     if [[ "$(tty)" = "/dev/tty1" ]]; then
         startx "~/.xinitrc"
     fi

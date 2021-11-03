@@ -1,4 +1,5 @@
 README.md
+.config/zsh/plugins/powerlevel10k/powerlevel10k/gitstatus
 
 {{- if ne .chezmoi.os "linux" }}
 .xinitrc

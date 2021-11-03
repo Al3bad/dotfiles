@@ -1,4 +1,5 @@
 syntax enable
+set hidden
 set number
 set nowrap
 set mouse=a
@@ -13,7 +14,9 @@ set clipboard=unnamedplus
 
 
 call plug#begin(stdpath("data") . "/plugged")
-Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
+Plug 'preservim/nerdtree'
+Plug 'Xuyuanp/nerdtree-git-plugin'
+Plug 'ryanoasis/vim-devicons'
 Plug 'vimsence/vimsence'
 Plug 'chrisbra/Colorizer'
 call plug#end()

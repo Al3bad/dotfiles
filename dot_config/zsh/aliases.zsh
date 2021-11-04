@@ -9,15 +9,15 @@ alias mylocip="get_my_local_ip"
 function get_my_local_ip() { ip route get 1.2.3.4 | awk '{print $7}' }
 
 #################################################
-# --> ptls tool
+# --> lsd tool
 #################################################
 
-if command -v ptls &> /dev/null
+if command -v lsd &> /dev/null
 then
-    alias ls='ptls'
-    alias pwd='ptpwd'
-    alias mkdir='ptmkdir'
-    alias touch='pttouch'
+    alias ls='lsd'
+    alias l='ls -al'
+    alias ll='ls -a'
+    alias tree='ls --tree'
 fi
 
 #################################################

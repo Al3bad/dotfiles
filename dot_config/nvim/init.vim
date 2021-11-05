@@ -9,7 +9,7 @@ set termguicolors                       " Needed for 'colorizer' plugin
 set nobackup                            " 
 set encoding=utf-8                      " 
 set scrolloff=5                         " 
-set expandtab tabstop=4 shiftwidth=4    " Convert tap to 4 spaces
+set expandtab tabstop=2 shiftwidth=2    " Convert tap to 4 spaces
 set background=dark                     " Dark bg
 set clipboard=unnamedplus               " Support clipboard
 
@@ -33,11 +33,20 @@ Plug 'glepnir/lspsaga.nvim'                     " LSP: Light-weight UI server
 Plug 'preservim/nerdtree'                       " NERDTree: File tree
 Plug 'Xuyuanp/nerdtree-git-plugin'              " NERDTree: Git status in file tree
 Plug 'ryanoasis/vim-devicons'                   " NERDTree: Icon in file tree
+Plug 'hrsh7th/nvim-cmp'                         " Completion
+Plug 'hrsh7th/cmp-nvim-lsp'                     " Completion
+Plug 'hrsh7th/cmp-buffer'                       " Completion
+Plug 'hrsh7th/cmp-path'                         " Completion
+Plug 'hrsh7th/cmp-cmdline'                      " Completion
+Plug 'onsails/lspkind-nvim'                     " Completion: icons
+Plug 'hrsh7th/cmp-vsnip'                        " Completion engine
+Plug 'hrsh7th/vim-vsnip'                        " Completion engine
 Plug 'vimsence/vimsence'                        " Discord presence
 Plug 'joshdick/onedark.vim'                     " Color scheme
 Plug 'norcalli/nvim-colorizer.lua'              " Show colors
 Plug 'tpope/vim-commentary'                     " Comments (gcc)
 Plug 'cohama/lexima.vim'                        " Auto close parentheses
+Plug 'windwp/nvim-ts-autotag'                   " Auto close html tags
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'} " Syntax highlighter
 call plug#end()
 

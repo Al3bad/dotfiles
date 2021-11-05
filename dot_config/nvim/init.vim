@@ -29,6 +29,7 @@ endif
 call plug#begin(stdpath('config') . '/plugged')
 Plug 'neovim/nvim-lspconfig'                    " LSP: client
 Plug 'williamboman/nvim-lsp-installer'          " LSP: server installer
+Plug 'glepnir/lspsaga.nvim'                     " LSP: Light-weight UI server
 Plug 'preservim/nerdtree'                       " NERDTree: File tree
 Plug 'Xuyuanp/nerdtree-git-plugin'              " NERDTree: Git status in file tree
 Plug 'ryanoasis/vim-devicons'                   " NERDTree: Icon in file tree
@@ -36,6 +37,7 @@ Plug 'vimsence/vimsence'                        " Discord presence
 Plug 'joshdick/onedark.vim'                     " Color scheme
 Plug 'norcalli/nvim-colorizer.lua'              " Show colors
 Plug 'tpope/vim-commentary'                     " Comments (gcc)
+Plug 'cohama/lexima.vim'                        " Auto close parentheses
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'} " Syntax highlighter
 call plug#end()
 

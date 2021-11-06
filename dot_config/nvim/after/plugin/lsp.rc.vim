@@ -1,70 +1,6 @@
 set completeopt=menu,menuone,noselect
 
 lua << EOF
--------------------------------------------------
----> LSP language servers
--------------------------------------------------
--- local lsp_installer = require("nvim-lsp-installer")
--- local protocol = require'vim.lsp.protocol'
--- 
--- lsp_installer.on_server_ready(function(server)
---   local opts = {}
--- 
---     -- (optional) Customize the options passed to the server
---   if server.name == "tsserver" then
---     opts.on_attach = function(client, bufnr)
---       local function buf_set_keymap(...) vim.api.nvim_buf_set_keymap(bufnr, ...) end
---       local function buf_set_option(...) vim.api.nvim_buf_set_option(bufnr, ...) end
--- 
---       local option = { noremap = true, silent = true }
--- 
---       if client.resolved_capabilities.document_formatting then
---           vim.api.nvim_command [[augroup Format]]
---           vim.api.nvim_command [[autocmd! * <buffer>]]
---           vim.api.nvim_command [[autocmd BufWritePre <buffer> lua vim.lsp.buf.formatting_seq_sync()]]
---           vim.api.nvim_command [[augroup END]]
---       end
--- 
---       protocol.CompletionItemKind = {
---         '', -- Text
---         '', -- Method
---         '', -- Function
---         '', -- Constructor
---         '', -- Field
---         '', -- Variable
---         '', -- Class
---         'ﰮ', -- Interface
---         '', -- Module
---         '', -- Property
---         '', -- Unit
---         '', -- Value
---         '', -- Enum
---         '', -- Keyword
---         '﬌', -- Snippet
---         '', -- Color
---         '', -- File
---         '', -- Reference
---         '', -- Folder
---         '', -- EnumMember
---         '', -- Constant
---         '', -- Struct
---         '', -- Event
---         'ﬦ', -- Operator
---         '', -- TypeParameter
---       }
--- 
---     end
---   end
--- 
---   if server.name == "html" then
---     opts.cmd = { "vscode-html-language-server", "--stdio" }
---   end
--- 
---   -- This setup() function is exactly the same as lspconfig's setup function.
---   -- Refer to https://github.com/neovim/nvim-lspconfig/blob/master/ADVANCED_README.md
---   server:setup(opts)
--- end)
-
 local lsp = require('lspconfig')
 local protocol = require'vim.lsp.protocol'
 local cmp = require'cmp'
@@ -191,18 +127,24 @@ local capabilities = require('cmp_nvim_lsp').update_capabilities(
   vim.lsp.protocol.make_client_capabilities()
 )
 
+-- Find the root of the working directory
+local root_dir = function (fname) 
+  return lsp.util.root_pattern(".git", "package.json", "index.html")(fname) 
+end
+
 -- LSP servers
 
 lsp.tsserver.setup {
   on_attach = on_attach,
   filetypes = { "javascript", "typescript", "typescriptreact", "typescript.tsx" },
-  capabilities = capabilities
+  capabilities = capabilities, 
+  root_dir = root_dir 
 }
 
 lsp.html.setup {
   on_attach = on_attach, 
   filetypes = {"html", "xml"},
   capabilities = capabilities,
-  root_dir = function (fname) return lsp.util.root_pattern(".git", "package.json")(fname) or lsp.util.dirname(fsname) end
-  }
+  root_dir = root_dir
+}
 EOF

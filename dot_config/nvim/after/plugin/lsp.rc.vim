@@ -40,8 +40,53 @@ cmp.setup.cmdline(':', {
 })
 
 -- Enable navigator plugin
-require 'navigator'.setup()
+require 'navigator'.setup({
+  treesitter_analysis = true,
+  default_mapping = true,
+  keymaps = {
+    { mode = "i", key = "<M-s>", func = "signature_help()" },
+    { mode = "n", key = "<M-s>", func = "signature_help()" }
+    },
+  icons = {
+    icons = true, -- set to false to use system default ( if you using a terminal does not have nerd/icon)
+    -- Code action
+    code_action_icon = " ", -- "",
+    -- code lens
+    code_lens_action_icon = " ",
+    -- Diagnostics
+    diagnostic_head = '',
+    diagnostic_err = "",
+    diagnostic_warn = "",
+    diagnostic_info = [[כֿ]],
+    diagnostic_hint = [[כֿ]],
 
+    diagnostic_head_severity_1 = "",
+    diagnostic_head_severity_2 = "☣️",
+    diagnostic_head_severity_3 = "",
+    diagnostic_head_description = "",
+    diagnostic_virtual_text = "",
+    diagnostic_file = "",
+    -- Values
+    value_changed = "",
+    value_definition = " ",
+    -- Treesitter
+    match_kinds = {
+      var = " ", -- "👹", -- Vampaire
+      method = "ƒ ", --  "🍔", -- mac
+      ["function"] = "ƒ ", -- "🤣", -- Fun
+      parameter = "  ", -- Pi
+      associated = " ",
+      namespace = "ﰮ ",
+      type = " ",
+      field = " "
+    },
+    treesitter_defult = ""
+    }
+})
+
+require 'lsp_signature'.setup({
+  hint_prefix = " "
+})
 
 -- protocol.CompletionItemKind = {
 --   '', -- Text

@@ -38,7 +38,9 @@ Plug 'hrsh7th/cmp-vsnip'                        " Completion engine
 Plug 'hrsh7th/vim-vsnip'                        " Completion engine
 Plug 'ray-x/guihua.lua', {'do': 'cd lua/fzy && make'}
 Plug 'ray-x/navigator.lua'
+Plug 'ray-x/lsp_signature.nvim'
 Plug 'vimsence/vimsence'                        " Discord presence
+Plug 'wakatime/vim-wakatime'                    " WakaTime
 Plug 'joshdick/onedark.vim'                     " Color scheme
 Plug 'norcalli/nvim-colorizer.lua'              " Show colors
 Plug 'tpope/vim-commentary'                     " Comments (gcc)

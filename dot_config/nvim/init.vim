@@ -13,6 +13,8 @@ set expandtab tabstop=2 shiftwidth=2    " Convert tap to 4 spaces
 set background=dark                     " Dark bg
 set clipboard=unnamedplus               " Support clipboard
 
+" Change leader key to space
+let mapleader = " "
 
 " If in MacOS, specify python path
 if has("unix")
@@ -43,7 +45,9 @@ Plug 'vimsence/vimsence'                        " Discord presence
 Plug 'wakatime/vim-wakatime'                    " WakaTime
 Plug 'joshdick/onedark.vim'                     " Color scheme
 Plug 'norcalli/nvim-colorizer.lua'              " Show colors
-Plug 'tpope/vim-commentary'                     " Comments (gcc)
+Plug 'tpope/vim-commentary'                     " Comments
+Plug 'MaxMEllon/vim-jsx-pretty'                 " Distinguish js and jsx file
+Plug 'suy/vim-context-commentstring'            " Apply correct comment based on code region
 " Plug 'cohama/lexima.vim'                        " Auto close parentheses
 Plug 'windwp/nvim-autopairs'
 Plug 'windwp/nvim-ts-autotag'                   " Auto close html tags

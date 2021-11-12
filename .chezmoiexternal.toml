@@ -14,12 +14,4 @@
     url = "https://github.com/romkatv/powerlevel10k/archive/v1.15.0.tar.gz"
     exact = true
     stripComponents = 1
-
-{{ if eq .chezmoi.os "linux" }}
-[".config/awesome/lain"]
-    type = "archive"
-    url = "https://github.com/lcpz/lain/archive/master.tar.gz"
-    exact = true
-    stripComponents = 1
-{{ end }}
 {{ end }}

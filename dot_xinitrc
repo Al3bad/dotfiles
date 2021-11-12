@@ -1,5 +1,2 @@
-VBoxClient --clipboard
-VBoxClient --seamless
-VBoxClient --vmsvga
 
-exec awesome
+exec i3

@@ -1,7 +1,8 @@
 README.md
 {{- if ne .chezmoi.os "linux" }}
+.Xresources
 .xinitrc
-/.config/awesome
-/.config/alacritty
+/.config/i3
+/.config/kitty
 /.config/picom
 {{- end }}

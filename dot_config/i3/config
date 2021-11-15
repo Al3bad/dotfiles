@@ -244,5 +244,5 @@ bar {
 #################################################
 exec_always feh --bg-scale /home/alabbad/Pictures/wallpapers/img-1.jpg
 exec_always --no-startup-id exec picom
+exec dunst
 exec discord
-

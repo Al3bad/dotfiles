@@ -72,12 +72,25 @@ volume() {
 format() {
   
   perl_filter='if (/.*\[(\d+%)\] (\[(-?\d+.\d+dB)\] )?\[(on|off)\]/)'
-  perl_filter+='{CORE::say $4 eq "off" ? "MUTE" : "'
+  perl_filter+='{CORE::say $4 eq "off" ? "MUTE " : "'
   # If dB was selected, print that instead
   perl_filter+=$([[ $STEP = *dB ]] && echo '$3' || echo '$1')
   perl_filter+='"; exit}'
   output=$(perl -ne "$perl_filter")
-  echo "$LABEL$output"
+  output="${output::-1}"
+  if [[ $output -ge 66 ]] 
+  then
+    icon=$HIGH
+  elif [[ $output -ge 33 ]]
+  then
+    icon=$MID
+  elif [[ $output -gt 0 ]]
+  then
+    icon=$LOW
+  else
+    icon=$MUTE
+  fi
+  echo "$icon$output"
 }
 
 #------------------------------------------------------------------------

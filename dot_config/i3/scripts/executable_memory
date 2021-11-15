@@ -17,7 +17,14 @@
 TYPE="${BLOCK_INSTANCE:-mem}"
 PERCENT="${PERCENT:-true}"
 
-awk -v type=$TYPE -v percent=$PERCENT '
+COLOR_NORMAL="${COLOR_NORMAL:-$color}"
+COLOR_WARN="${COLOR_WARN:-#FFFF85}"
+COLOR_DANG="${COLOR_DANG:-#FFAE50}"
+COLOR_CRIT="${COLOR_CRIT:-#e26a72}"
+
+awk -v type=$TYPE -v percent=$PERCENT \
+    -v COLOR_NORMAL=$COLOR_NORMAL -v COLOR_WARN=$COLOR_WARN \
+    -v COLOR_DANG=$COLOR_DANG -v COLOR_CRIT=$COLOR_CRIT '
 /^MemTotal:/ {
 	mem_total=$2
 }
@@ -60,11 +67,13 @@ END {
 	printf("%.f%%\n", pct)
 	# color
 	if (pct > 90) {
-		print("#FF0000")
+		print(COLOR_CRIT)
 	} else if (pct > 80) {
-		print("#FFAE00")
+		print(COLOR_DANG)
 	} else if (pct > 70) {
-		print("#FFF600")
-	}
+		print(COLOR_WARN)
+  } else {
+    print(COLOR_NORMAL)
+  }
 }
 ' /proc/meminfo

@@ -46,14 +46,22 @@ $percent = $2;
 
 if ($status eq 'Charging') {
   $label = $ENV{CHARGING};
-} elsif ($percent > 80) {
+} elsif ($percent > 90) {
   $label = $ENV{FULL};
-} elsif ($percent > 60) {
+} elsif ($percent > 80) {
+  $label = $ENV{LVL_90};
+} elsif ($percent > 70) {
   $label = $ENV{LVL_80};
-} elsif ($percent > 40) {
+} elsif ($percent > 60) {
+  $label = $ENV{LVL_70};
+} elsif ($percent > 50) {
   $label = $ENV{LVL_60};
-} elsif ($percent > 20) {
+} elsif ($percent > 40) {
+  $label = $ENV{LVL_50};
+} elsif ($percent > 30) {
   $label = $ENV{LVL_40};
+} elsif ($percent > 20) {
+  $label = $ENV{LVL_30};
 } elsif ($percent > 10) {
   $label = $ENV{LVL_20};
 } else {

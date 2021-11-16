@@ -3,6 +3,7 @@ README.md
 .Xresources
 .xinitrc
 /.config/i3
+/.config/rofi
 /.config/kitty
 /.config/picom
 {{- end }}

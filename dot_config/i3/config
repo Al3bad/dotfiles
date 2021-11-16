@@ -64,7 +64,7 @@ bindsym $mod+Return exec i3-sensible-terminal
 # --> Program Luncher/Runner
 #################################################
 # start dmenu (a program launcher)
-bindsym $mod+r exec "rofi -modi run,drun -show drun -show-icons -dpi 144"
+bindsym $mod+r exec "rofi -show drun -show-icons -dpi 144"
 
 #################################################
 # --> Workspaces

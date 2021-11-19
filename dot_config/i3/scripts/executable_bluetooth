@@ -1,0 +1,84 @@
+#!/usr/bin/env bash
+
+# Depends on:
+#   Arch repositories:  bluez-utils (contains bluetoothctl)
+
+
+# Checks if bluetooth controller is powered on
+power_on() {
+    if bluetoothctl show | grep -q "Powered: yes"; then
+        return 0
+    else
+        return 1
+    fi
+}
+
+# Checks if a device is connected
+device_connected() {
+    device_info=$(bluetoothctl info "$1")
+    if echo "$device_info" | grep -q "Connected: yes"; then
+        return 0
+    else
+        return 1
+    fi
+}
+
+show_connected_devices() {
+  for device in "${paired_devices[@]}"; do
+    if device_connected $device; then
+      device_alias=$(bluetoothctl info $device | grep "Alias" | cut -d ' ' -f 2-)
+      
+      counter=0
+      devices_list=""
+
+      if [ $counter -gt 0 ]; then
+        devices_list="${devices_list}\n\- ${device_alias}"
+      else
+        devices_list="\- ${device_alias}\n"
+      fi
+
+      ((counter++))
+    fi
+  done
+  notify-send "Connected Devices:" "${devices_list}"
+}
+
+# Service is inactive
+if [[ $(systemctl is-active bluetooth) != "active" ]]; then
+  echo $LABEL             # short text
+  echo $LABEL             # full text
+  echo $COLOR_SERVICE_INACTIVE    # text color
+  exit
+fi
+
+# Service is active ... check if bluetooth is powered on
+if power_on; then
+  # printf ''
+  # Get all paired devices
+  mapfile -t paired_devices < <(bluetoothctl paired-devices | grep Device | cut -d ' ' -f 2)
+  # right-click shows the list of connected devices
+  case $BLOCK_BUTTON in
+    3) show_connected_devices ;; 
+  esac
+  counter=0
+  # Number of connected devices
+  for device in "${paired_devices[@]}"; do
+    if device_connected $device; then
+      ((counter++))
+    fi
+  done
+  if [[ $counter -gt 0 ]]; then
+    echo "${LABEL_POWERED_ON}${counter}"
+    echo "${LABEL_POWERED_ON}${counter}"
+    echo $COLOR_CONNECTED
+  else
+    echo ${LABEL_POWERED_ON}
+    echo ${LABEL_POWERED_ON}
+  fi
+else
+  echo $LABEL     # short text
+  echo $LABEL     # full text
+fi
+
+
+

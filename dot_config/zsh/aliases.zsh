@@ -21,5 +21,10 @@ then
 fi
 
 #################################################
-# --> 
+# --> Kitty terminal aliases
 #################################################
+
+if command -v kitty &> /dev/null
+then
+  alias icat="kitty +kitten icat"
+fi

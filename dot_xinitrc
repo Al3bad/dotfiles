@@ -1,2 +1,8 @@
+# DBI configuration
 xrdb -merge ~/.Xresources
+
+# Activate keymap table
+[[ -f ~/.Xmodmap ]] && xmodmap ~/.Xmodmap
+
+# Start window manager
 exec i3

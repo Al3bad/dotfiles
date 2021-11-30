@@ -1,3 +1,5 @@
+
+
 lua << EOF
 local lspconfig = require("lspconfig");
 local cmp = require'cmp'
@@ -46,6 +48,15 @@ require 'navigator'.setup({
   keymaps = {
     { mode = "i", key = "<M-s>", func = "signature_help()" },
     { mode = "n", key = "<M-s>", func = "signature_help()" }
+    },
+  lsp = {
+    disable_lsp = {
+        "angularls", "gopls", "flow", "dockerls", "julials",
+        "jedi_language_server", "jdtls", "sumneko_lua", "solargraph",
+        "ccls", "denols", "graphql", "dartls", "dotls", "kotlin_language_server", 
+        "nimls", "intelephense", "vuels", "phpactor", "omnisharp",
+        "r_language_server", "rust_analyzer", "terraformls", "svelte", "texlab", "clojure_lsp"
+      }
     },
   icons = {
     icons = true, -- set to false to use system default ( if you using a terminal does not have nerd/icon)
@@ -117,6 +128,4 @@ require 'lsp_signature'.setup({
 -- }
 
 EOF
-
-
 

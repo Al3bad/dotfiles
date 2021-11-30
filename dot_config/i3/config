@@ -29,11 +29,13 @@ exec --no-startup-id dex --autostart --environment i3
 exec --no-startup-id xss-lock --transfer-sleep-lock -- i3lock --nofork
 bindsym $mod+l exec "~/.config/i3/scripts/i3lock-pix.sh"
 
-
 #################################################
 # --> Take screenshot
 #################################################
-bindsym $mod+Shift+s exec "~/.config/i3/scripts/screenshot.sh"
+# Full screenshot
+bindsym $mod+Shift+f exec "~/.config/i3/scripts/screenshot.sh -f"
+# Rectangular screenshot
+bindsym --release $mod+Shift+s exec "~/.config/i3/scripts/screenshot.sh -s"
 
 #################################################
 # --> GUI Network Manager
@@ -127,7 +129,7 @@ bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcu
 # --> Windows
 #################################################
 # Remove title bar
-default_border pixel 1
+default_border pixel 0
 
 # Useless Gaps
 gaps inner 20

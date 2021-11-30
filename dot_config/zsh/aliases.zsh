@@ -30,3 +30,13 @@ if command -v kitty &> /dev/null
 then
   alias icat="kitty +kitten icat"
 fi
+
+#################################################
+# --> Trashcan aliases
+#################################################
+
+if command -v rmtrash &> /dev/null
+then
+  alias rm="rmtrash"
+  alias rmdir="rmdirtrash"
+fi

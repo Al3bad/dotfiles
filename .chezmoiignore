@@ -1,5 +1,5 @@
 README.md
-{{- if ne .chezmoi.os "linux" }}
+{{- if ne .chezmoi.osRelease.name "Arch Linux" }}
 .Xresources
 .xinitrc
 /.config/i3

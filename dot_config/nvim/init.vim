@@ -21,6 +21,9 @@ set cursorline
 set list
 set listchars=tab:\ ,trail:.
 
+" Change leader key to space
+let mapleader = " "
+
 " Use the terminal bg color after applying the color scheme
 autocmd ColorScheme * hi Normal ctermbg=NONE guibg=NONE
 
@@ -52,6 +55,9 @@ Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 "Navigator
 Plug 'ray-x/navigator.lua'
 Plug 'ray-x/lsp_signature.nvim'
+" Telescope
+Plug 'nvim-lua/plenary.nvim'
+Plug 'nvim-telescope/telescope.nvim'
 " Emmet plugin
 Plug 'mattn/emmet-vim'
 " Plug 'sbdchd/neoformat'   " TODO: Use 'ale' plugin instead?
@@ -84,24 +90,22 @@ call plug#end()
 "################################################
 " --> Plugin Config
 "################################################
-
+ 
 colorscheme onedark                                   " Set color scheme for vim
-" source ~/.config/nvim/plugins/vim-surround.vim        " Custom surrounding
-source ~/.config/nvim/plugins/vim-visual-multi.vim    " Enable mouse to add cursors
-" source ~/.config/nvim/plugins/vim-commentary.vim    " Support more file types
-source ~/.config/nvim/plugins/nvim-treesitter.vim
-source ~/.config/nvim/plugins/nvim-lspconfig.vim
-
-source ~/.config/nvim/plugins/vimsence.vim
-source ~/.config/nvim/plugins/nerdtree.vim
-source ~/.config/nvim/plugins/vim-airline.vim
+" :so ~/.config/nvim/plugins/vim-surround.vim        " Custom surrounding
+:so ~/.config/nvim/plugins/vim-visual-multi.vim    " Enable mouse to add cursors
+" :so ~/.config/nvim/plugins/vim-commentary.vim    " Support more file types
+:so ~/.config/nvim/plugins/nvim-treesitter.vim
+:so ~/.config/nvim/plugins/telescope.vim
+:so ~/.config/nvim/plugins/nvim-lspconfig.vim
+:so ~/.config/nvim/plugins/vimsence.vim
+:so ~/.config/nvim/plugins/nerdtree.vim
+:so ~/.config/nvim/plugins/vim-airline.vim
 
 "################################################
 " --> General key bindings
 "################################################
 
-" Change leader key to space
-let mapleader = " "
 
 " Toggle spell checker
 map <leader>s :setlocal spell!<CR>

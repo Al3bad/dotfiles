@@ -53,7 +53,7 @@ require 'navigator'.setup({
     disable_lsp = {
         "angularls", "gopls", "flow", "dockerls", "julials",
         "jedi_language_server", "jdtls", "sumneko_lua", "solargraph",
-        "ccls", "denols", "graphql", "dartls", "dotls", "kotlin_language_server", 
+        "denols", "graphql", "dartls", "dotls", "kotlin_language_server", 
         "nimls", "intelephense", "vuels", "phpactor", "omnisharp",
         "r_language_server", "rust_analyzer", "terraformls", "svelte", "texlab", "clojure_lsp"
       }

@@ -122,7 +122,7 @@ endfunction
 map <leader>o <Cmd>call s:open_link()<CR>
 
 " Remap Esc key
-inoremap ;; <Esc>
+inoremap jj <Esc>
 
 " Tab navigation
 nnoremap tp :bprevious<CR>

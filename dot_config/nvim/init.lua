@@ -170,3 +170,12 @@ keymap("n", "<C-b>",":NvimTreeToggle<CR>", opts)
 keymap('n', '<leader>th', ":ToggleTerm size=10 direction=horizontal<CR>", opts)
 keymap('n', '<leader>tf', ":ToggleTerm direction=float<CR>", opts)
 
+-- Telescope (telescope plugin) --
+-- nnoremap <leader>ff :Telescope find_files<cr>
+-- nnoremap <leader>fg :Telescope live_grep<cr>
+-- nnoremap <leader>fb :Telescope buffers<cr>
+-- nnoremap <leader>fh :Telescope help_tags<cr>
+keymap("n", "<leader>ff", ":lua require'telescope.builtin'.find_files(require('telescope.themes').get_ivy())<CR>", opts)
+keymap("n", "<leader>fg", ":lua require'telescope.builtin'.live_grep(require('telescope.themes').get_ivy())<CR>", opts)
+keymap("n", "<leader>fb", ":lua require'telescope.builtin'.buffers(require('telescope.themes').get_ivy())<CR>", opts)
+keymap("n", "<leader>fh", ":lua require'telescope.builtin'.help_tags(require('telescope.themes').get_ivy())<CR>", opts)

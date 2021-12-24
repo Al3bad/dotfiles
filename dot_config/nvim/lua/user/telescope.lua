@@ -7,11 +7,10 @@ local actions = require "telescope.actions"
 
 telescope.setup {
   defaults = {
-
     prompt_prefix = " ",
     selection_caret = " ",
     path_display = { "smart" },
-
+    file_ignore_patterns = {"node_modules", "OneDrive", "onedrive"},
     mappings = {
       i = {
         ["<C-n>"] = actions.cycle_history_next,
@@ -95,13 +94,3 @@ telescope.setup {
   },
 }
 
--------------------------------------------------
--- --> Keympas
--------------------------------------------------
-
-local opts = { noremap = true, silent = true }
-
--- Shorten function name
-local keymap = vim.api.nvim_set_keymap
-
-keymap("n", "<leader>ff", ":lua require'telescope.builtin'.find_files(require('telescope.themes').get_ivy())<CR>", opts)

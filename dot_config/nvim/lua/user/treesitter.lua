@@ -4,8 +4,8 @@ if not status_ok then
 end
 
 configs.setup {
-  ensure_installed = { "lua", "typescript", "html", "css", "json" }, -- one of "all", "maintained" (parsers with maintainers), or a list of languages
-  sync_install = false, -- install languages synchronously (only applied to `ensure_installed`)
+  ensure_installed = { "lua", "typescript", "javascript", "tsx", "html", "css", "scss","json" }, -- one of "all", "maintained" (parsers with maintainers), or a list of languages
+  sync_install = true, -- install languages synchronously (only applied to `ensure_installed`)
   ignore_install = { "" }, -- List of parsers to ignore installing
   autopairs = {
     enable = true,
@@ -16,6 +16,9 @@ configs.setup {
     additional_vim_regex_highlighting = true,
   },
   indent = { enable = true, disable = { "yaml" } },
+  autotag = {
+    enable = true,
+  },
   context_commentstring = {
     enable = true,
     enable_autocmd = false,

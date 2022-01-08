@@ -2,7 +2,7 @@
 xrdb -merge ~/.Xresources
 
 # Activate keymap table
-[[ -f ~/.Xmodmap ]] && xmodmap ~/.Xmodmap
+# [[ -f ~/.Xmodmap ]] && xmodmap ~/.Xmodmap
 
 # Start window manager
 exec i3

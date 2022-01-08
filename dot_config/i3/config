@@ -250,9 +250,11 @@ bar {
 
 
 #################################################
-# --> Autostart Applications
+# --> Autostart Applications/Scripts
 #################################################
+exec_always xmodmap ~/.Xmodmap
 exec_always feh --bg-scale /home/alabbad/Pictures/wallpapers/img-1.jpg
 exec_always --no-startup-id exec picom
 exec_always killall dunst;dunst
+exec_always killall udiskie;udiskie
 exec discord

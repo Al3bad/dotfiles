@@ -6,4 +6,4 @@ end
 require "user.lsp.lsp-installer"
 require("user.lsp.handlers").setup()
 require "user.lsp.null-ls"
-require "lsp_signature".setup()
+require "lsp_signature".setup({ toggle_key = "<C-x>" })

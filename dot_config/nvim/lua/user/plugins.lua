@@ -46,7 +46,7 @@ return packer.startup(function(use)
   use "lambdalisue/suda.vim" -- Write file with sudo (:SudoWrite)
   use "moll/vim-bbye" -- Delete buffers & close files in without closing windows or messing the layout
   use "lukas-reineke/indent-blankline.nvim"
-  use "terryma/vim-multiple-cursors"
+  use "mg979/vim-visual-multi"
   -- use "ahmedkhalf/project.nvim" -- Projecect managment tool
   -- use "lewis6991/impatient.nvim" -- Speed up vim startup
   -- use "goolord/alpha-nvim" -- Welcome page

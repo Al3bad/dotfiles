@@ -9,3 +9,5 @@ export PATH="/usr/local/opt/coreutils/libexec/gnubin:$PATH" # GNU commands
 export PATH=~/.local/bin:$PATH                              # ptSh & any tool installed in this dir
 export PATH=${PATH}:/usr/local/mysql/bin/                   # MySQL
 
+export NVM_DIR="$HOME/.nvm"     # NVM - NodeJS version manager
+

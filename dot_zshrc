@@ -3,8 +3,11 @@
 #################################################
 
 export ZSH="${HOME}/.config/zsh"                            # ZSH configuration path
+export HISTSIZE=100
+export SAVEHIST=100
+export HISTFILE=${ZSH}/.zsh_history
+
 source ${ZSH}/.zshenv
-export NVM_DIR="$HOME/.nvm"
 
 #################################################
 # --> NeoFetch (if available)

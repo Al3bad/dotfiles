@@ -13,7 +13,7 @@ configuration {
     display-name: "";
   }
 
-	modi: "run,drun,scripts:~/.config/rofi/scripts/scripts,power:~/.config/rofi/scripts/rofi-power-menu";
+	modi: "run,drun,scripts:~/.config/rofi/scripts/rofi-scripts-menu,power:~/.config/rofi/scripts/rofi-power-menu";
 /*  font: "SFNS Display 12"; */
 /*	location: 0;*/
 /*	yoffset: 0;*/

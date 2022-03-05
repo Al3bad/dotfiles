@@ -1,0 +1,47 @@
+#!/usr/bin/env bash
+
+I3_SCRIPTS_DIR="${HOME}/.config/i3/scripts"
+scripts=(onedrive notify)
+
+#################################################
+# --> Define the text for the entries
+#################################################
+
+declare -A texts
+texts[onedrive]="OneDrive (Sync with the cloud)"
+texts[notify]="Test Notification"
+
+
+#################################################
+# --> Handlers
+#################################################
+
+if [ x"$@" = x"${texts[notify]}" ]
+then
+  notify-send --app-name="Test Script" " " "Hello World\!"
+  exit 0
+elif [ x"$@" = x"${texts[onedrive]}" ]
+then
+  SCRIPT_DIR="$I3_SCRIPTS_DIR/onedrive.sh"
+  if [ -f $SCRIPT_DIR ]
+  then
+    notify-send --app-name="OneDrive" " " "Syncing..."
+    # coproc commnad is used here to run the script in the background
+    coproc ( $SCRIPT_DIR )
+  else
+    notify-send --app-name="OneDrive" " " "The script in this directory '$SCRIPT_DIR' doesn't exist\!"
+  fi
+  exit 0
+fi
+
+#################################################
+# --> Display menu
+#################################################
+
+echo -e "\0prompt\x1fScripts menu"
+for entry in "${scripts[@]}"
+do
+    echo "${texts[$entry]}"
+done
+# echo "$ONEDRIVE"
+# echo quit

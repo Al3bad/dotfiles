@@ -39,12 +39,6 @@ bindsym $mod+Shift+f exec --no-startup-id "~/.config/i3/scripts/screenshot.sh -f
 # Rectangular screenshot
 bindsym --release $mod+Shift+s exec --no-startup-id "~/.config/i3/scripts/screenshot.sh -s"
 
-#################################################
-# --> GUI Network Manager
-#################################################
-# NetworkManager is the most popular way to manage wireless networks on Linux,
-# and nm-applet is a desktop environment-independent system tray GUI for it.
-exec --no-startup-id nm-applet
 
 #################################################
 # --> Volume Control
@@ -132,6 +126,7 @@ bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcu
 #################################################
 # Remove title bar
 default_border pixel 0
+for_window [class="^.*"] border pixel 0
 
 # Useless Gaps
 gaps inner 20
@@ -235,7 +230,7 @@ client.urgent           $bg-color-urgent    $bg-color-urgent    $dark           
 # finds out, if available)
 bar {
   status_command i3blocks -c ~/.config/i3/i3blocks.conf
-	position top
+  position top
   tray_padding 3
   colors {
     background  $dark
@@ -248,13 +243,37 @@ bar {
   }
 }
 
+#################################################
+# --> Applets
+#################################################
+
+# Netowrk manager applet
+exec --no-startup-id nm-applet
+
+# Bluetooth applet
+exec --no-startup-id blueman-applet
 
 #################################################
 # --> Autostart Applications/Scripts
 #################################################
+
+# Keyboard remap script
 exec_always --no-startup-id xmodmap ~/.Xmodmap
+
+# Set the background
 exec_always --no-startup-id feh --bg-scale /home/alabbad/Pictures/wallpapers/img-1.jpg
+
+# Start the compositer
 exec_always --no-startup-id picom
+
+# Start the notification daemon
 exec_always --no-startup-id killall dunst;dunst
+
+# Start auto mount daemon
 exec_always --no-startup-id killall udiskie;udiskie
+
+# Start Discord
 exec --no-startup-id discord
+
+# Start OneDrive sync
+exec --no-startup-id "~/.config/i3/scripts/onedrive.sh"

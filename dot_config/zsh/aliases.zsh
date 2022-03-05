@@ -52,3 +52,12 @@ then
   alias rm="rmtrash"
   alias rmdir="rmdirtrash"
 fi
+
+#################################################
+# --> Feh
+#################################################
+
+if command -v feh &> /dev/null
+then
+  alias feh-browser="feh --scale-down -B #333333 --start-at"
+fi

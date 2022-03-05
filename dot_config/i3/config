@@ -35,9 +35,10 @@ bindsym $mod+l exec --no-startup-id "~/.config/i3/scripts/i3lock-pix.sh"
 # --> Take screenshot
 #################################################
 # Full screenshot
-bindsym $mod+Shift+f exec --no-startup-id "~/.config/i3/scripts/screenshot.sh -f"
+# bindsym $mod+Shift+f exec --no-startup-id "~/.config/i3/scripts/screenshot.sh -f"
 # Rectangular screenshot
-bindsym --release $mod+Shift+s exec --no-startup-id "~/.config/i3/scripts/screenshot.sh -s"
+# bindsym --release $mod+Shift+s exec --no-startup-id "~/.config/i3/scripts/screenshot.sh -s"
+bindsym --release $mod+Shift+s exec --no-startup-id "maim -s | xclip -selection clipboard -t image/png"
 
 
 #################################################

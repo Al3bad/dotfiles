@@ -1,8 +1,9 @@
 # See dunst(5) for all configuration options
 
 [global]
+    ###############
     ### Display ###
-
+    ###############
     # Which monitor should the notifications be displayed on.
     monitor = 0
 
@@ -19,47 +20,32 @@
     # will be ignored.
     follow = mouse
 
+    ################
     ### Geometry ###
-
-    # dynamic width from 0 to 300
-    # width = (0, 300)
-    # constant width of 300
+    ################
     width = 400
-
-    # The maximum height of a single notification, excluding the frame.
     height = 130
 
     # Position the notification in the top right corner
     origin = top-right
-
     # Offset from the origin
     offset = 10x50
-
     # Scale factor. It is auto-detected if value is 0.
     scale = 0
-
     # Maximum number of notification (0 means no limit)
     notification_limit = 0
 
+    ####################
     ### Progress bar ###
-
+    ####################
     # Turn on the progess bar. It appears when a progress hint is passed with
     # for example dunstify -h int:value:12
     progress_bar = true
-
-    # Set the progress bar height. This includes the frame, so make sure
-    # it's at least twice as big as the frame width.
     progress_bar_height = 5
-
-    # Set the frame width of the progress bar
     progress_bar_frame_width = 1
-
-    # Set the minimum width for the progress bar
     progress_bar_min_width = 150
-
-    # Set the maximum width for the progress bar
-    progress_bar_max_width = 300
-
+    progress_bar_max_width = 400
+    highlight = "#3c5f7d"
 
     # Show how many messages are currently hidden (because of
     # notification_limit).
@@ -68,28 +54,20 @@
     # The transparency of the window.  Range: [0; 100].
     # This option will only work if a compositing window manager is
     # present (e.g. xcompmgr, compiz, etc.). (X11 only)
-    transparency = 30
+    transparency = 1
 
-    # Draw a line of "separator_height" pixel height between two
-    # notifications.
-    # Set to 0 to disable.
-    separator_height = 1
+    # Draw a line between notifications
+    separator_height = 4
 
     # Padding between text and separator.
     padding = 20
-
     # Horizontal padding.
     horizontal_padding = 20
-
     # Padding between text and icon.
     text_icon_padding = 0
 
-    # Defines width in pixels of frame around the notification window.
-    # Set to 0 to disable.
-    frame_width = 2
-
-    # Defines color of the frame around the notification window.
-    frame_color = "#aaaaaa"
+    frame_width = 0
+    frame_color = "#282c34"
 
     # Define a color for the separator.
     # possible values are:
@@ -100,7 +78,7 @@
     separator_color = frame
 
     # Sort messages by urgency.
-    sort = yes
+    sort = no
 
     # Don't remove messages, if the user is idle (no mouse or keyboard input)
     # for longer than idle_threshold seconds.
@@ -109,8 +87,9 @@
     # section for how to disable this if necessary
     # idle_threshold = 120
 
+    ############
     ### Text ###
-
+    ############
     # font = Monospace 8
     font = SFNS Display 12
 
@@ -152,7 +131,7 @@
     #   %n  progress value if set without any extra characters
     #   %%  Literal %
     # Markup is allowed
-    format = "<b>%a</b>\n%b"
+    format = "<b>%a</b>\n%s"
 
     # Alignment of message text.
     # Possible values are "left", "center" and "right".
@@ -178,7 +157,7 @@
     stack_duplicates = false
 
     # Hide the count of stacked notifications with the same content
-    hide_duplicate_count = false
+    # hide_duplicate_count = false
 
     # Display indicators for URLs (U) and actions (A).
     show_indicators = yes
@@ -191,13 +170,13 @@
     # Scale small icons up to this size, set to 0 to disable. Helpful
     # for e.g. small files or high-dpi screens. In case of conflict,
     # max_icon_size takes precedence over this.
-    min_icon_size = 0
+    min_icon_size = 54
 
     # Scale larger icons down to this size, set to 0 to disable
-    max_icon_size = 32
+    max_icon_size = 54
 
     # Paths to default icons.
-    icon_path = /usr/share/icons/gnome/16x16/status/:/usr/share/icons/gnome/16x16/devices/
+    icon_path = /usr/share/icons/Arc/status/symbolic/:/usr/share/icons/gnome/16x16/status/:/usr/share/icons/gnome/16x16/devices/
 
     ### History ###
 
@@ -230,7 +209,7 @@
     # corners.
     # The radius will be automatically lowered if it exceeds half of the
     # notification height to avoid clipping text and/or icons.
-    corner_radius = 2
+    corner_radius = 0
 
     # Ignore the dbus closeNotification message.
     # Useful to enforce the timeout set by dunst configuration. Without this
@@ -293,24 +272,24 @@
 [urgency_low]
     # IMPORTANT: colors have to be defined in quotation marks.
     # Otherwise the "#" and following would be interpreted as a comment.
-    background = "#282c34"
+    background = "#282c34AA"
     foreground = "#abb1bf"
     timeout = 5
     # Icon for notifications with low urgency, uncomment to enable
     #new_icon = /path/to/icon
 
 [urgency_normal]
-    background = "#282c34"
+    background = "#282c34AA"
     foreground = "#abb1bf"
-    frame_color = "#5d9bcf"
+    # frame_color = "#5d9bcf"
     timeout = 5 
     # Icon for notifications with normal urgency, uncomment to enable
     #new_icon = /path/to/icon
 
 [urgency_critical]
-    background = "#282c34"
+    background = "#282c34AA"
     foreground = "#abb1bf"
-    frame_color = "#e26a72"
+    # frame_color = "#e26a72"
     timeout = 0
     # Icon for notifications with critical urgency, uncomment to enable
     #new_icon = /path/to/icon
@@ -391,6 +370,11 @@
 #[espeak]
 #    summary = "*"
 #    script = dunst_espeak.sh
+
+[volume]
+  summary = "*"
+  script = /home/alabbad/.config/dunst/scripts/sys-sound.sh
+
 
 #[script-test]
 #    summary = "*script*"

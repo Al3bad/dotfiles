@@ -51,6 +51,9 @@ return packer.startup(function(use)
   -- use "lewis6991/impatient.nvim" -- Speed up vim startup
   -- use "goolord/alpha-nvim" -- Welcome page
   -- use "folke/which-key.nvim" -- Show kay maps in a window
+  
+  -- Sesstion management
+  use "tpope/vim-obsession"
 
   -- Colorschemes
   use 'joshdick/onedark.vim'
@@ -96,6 +99,7 @@ return packer.startup(function(use)
 
   -- Telescope
   use "nvim-telescope/telescope.nvim"
+  use "nvim-telescope/telescope-media-files.nvim"
 
   -- Treesitter
   use {

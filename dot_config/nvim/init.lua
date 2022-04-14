@@ -82,7 +82,7 @@ vim.g.maplocalleader = " "
 
 -- Normal --
 -- Toggle spell checkier
-keymap("n", "<leader>s", ":setlocal spell!<CR>", opts)
+keymap("n", "<leader>ss", ":setlocal spell!<CR>", opts)
 
 -- Split windows/panes
 keymap("n", "ss", ":split<CR>", opts)
@@ -162,7 +162,6 @@ require "user.presence"
 -- --> Plugins keymaps
 -------------------------------------------------
 
-
 -- File explorer (nvim-tree plugin) --
 keymap("n", "<C-b>",":NvimTreeToggle<CR>", opts)
 -- nnoremap <leader>r :NvimTreeRefresh<CR>
@@ -170,6 +169,7 @@ keymap("n", "<C-b>",":NvimTreeToggle<CR>", opts)
 
 -- Terminal (toggleterm plugin) --
 keymap('n', '<leader>th', ":ToggleTerm size=10 direction=horizontal<CR>", opts)
+keymap('n', '<leader>tf', ":ToggleTerm direction=float<CR>", opts)
 keymap('n', '<leader>tf', ":ToggleTerm direction=float<CR>", opts)
 
 -- Telescope (telescope plugin) --
@@ -181,3 +181,39 @@ keymap("n", "<leader>ff", ":lua require'telescope.builtin'.find_files(require('t
 keymap("n", "<leader>fg", ":lua require'telescope.builtin'.live_grep(require('telescope.themes').get_ivy())<CR>", opts)
 keymap("n", "<leader>fb", ":lua require'telescope.builtin'.buffers(require('telescope.themes').get_ivy())<CR>", opts)
 keymap("n", "<leader>fh", ":lua require'telescope.builtin'.help_tags(require('telescope.themes').get_ivy())<CR>", opts)
+keymap("n", "<leader>fm", ":lua require('telescope').extensions.media_files.media_files()<CR>", opts)
+keymap("n", "<leader>sg", ":lua require'telescope.builtin'.spell_suggest(require('telescope.themes').get_ivy())<CR>", opts)
+
+
+-------------------------------------------------
+-- --> Matlab
+-------------------------------------------------
+-- autocmd BufNewFile,BufRead *.m set ft=matlab
+
+local toggleterm = require("toggleterm.terminal");
+
+function open_matlab()
+  if #toggleterm.get_all() == 0 and toggleterm.get_toggled_id(1) == nil then
+    vim.cmd(":1TermExec cmd='matlab -nodesktop -nosplash' size=10 direction=horizontal")
+  else
+    print("Matlab is running")
+  end
+end
+
+function run_matlab_cmd()
+  if #toggleterm.get_all() > 0 and toggleterm.get_toggled_id(1) ~= nil then
+    vim.cmd(":1TermExec cmd='run(\"%:p\")'")
+  else
+    print("Matlab is not running")
+  end
+end
+
+vim.cmd([[
+autocmd BufEnter,BufWinEnter *.m nmap <leader>tms :lua open_matlab()<CR>
+autocmd BufEnter,BufWinEnter *.m nmap <leader>tmr :lua run_matlab_cmd()<CR>
+
+autocmd BufLeave *.m nmap <leader>tms <Nop>
+autocmd BufLeave *.m nmap <leader>tmr <Nop>
+"]])
+
+

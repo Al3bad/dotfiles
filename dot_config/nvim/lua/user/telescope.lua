@@ -1,10 +1,14 @@
+-- Check the existance of the plugin
 local status_ok, telescope = pcall(require, "telescope")
 if not status_ok then
   return
 end
 
-local actions = require "telescope.actions"
+-- Extensions setup
+telescope.load_extension("media_files")
 
+-- Telescope setup
+local actions = require "telescope.actions"
 telescope.setup {
   defaults = {
     prompt_prefix = " ",

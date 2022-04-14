@@ -11,3 +11,7 @@ export PATH=${PATH}:/usr/local/mysql/bin/                   # MySQL
 
 export NVM_DIR="$HOME/.nvm"     # NVM - NodeJS version manager
 
+# Export icons for "lf" file manager
+LF_ICONS_PATH="$HOME/.config/lf/icons"
+[ -f $LF_ICONS_PATH ] && source $LF_ICONS_PATH
+

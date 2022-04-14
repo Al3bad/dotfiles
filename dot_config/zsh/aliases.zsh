@@ -61,3 +61,13 @@ if command -v feh &> /dev/null
 then
   alias feh-browser="feh --scale-down -B #333333 --start-at"
 fi
+
+#################################################
+# --> LF - change directory
+#################################################
+LFCD="$HOME/.config/lf/lfcd"                                #  pre-built binary, make sure to use absolute path
+if [ -f "$LFCD" ]; then
+    source "$LFCD"
+fi
+
+

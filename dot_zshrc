@@ -37,13 +37,16 @@ source ${ZSH}/plugins/sudo.plugin.zsh
 source ${ZSH}/plugins/zsh-autosuggestions.plugin.zsh
 source ${ZSH}/plugins/zsh-syntax-highlighting.plugin.zsh
 source ${ZSH}/plugins/powerlevel10k.plugin.zsh
+source ${ZSH}/plugins/z.plugin.zsh
 test -e "${ZSH}/plugins/iterm2-shell-integration.zsh" && source "${ZSH}/plugins/iterm2-shell-integration.zsh"
+
 
 #################################################
 # --> Aliases
 #################################################
 
 source ${ZSH}/aliases.zsh
+source ${ZSH}/profile_aliases.zsh
 
 #################################################
 # --> nvm (if available)
@@ -51,5 +54,4 @@ source ${ZSH}/aliases.zsh
 
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
-
 

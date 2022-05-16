@@ -371,7 +371,7 @@
 #    summary = "*"
 #    script = dunst_espeak.sh
 
-[volume]
+[sound]
   summary = "*"
   script = /home/alabbad/.config/dunst/scripts/sys-sound.sh
 

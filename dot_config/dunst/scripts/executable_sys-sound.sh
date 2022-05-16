@@ -6,8 +6,10 @@ FREEDESKTOP_DIR=/usr/share/sounds/freedesktop/stereo
 SYSSOUND_DIR=$HOME/Music/system-sounds
 
 # Don't play sound for these notifications
-[[ $APPNAME == "flameshot" ]] || [[ $APPNAME == "Backlight" ]] || \
-[[ $APPNAME == "discord" ]] && exit 0
+APP_IGNORE=(flameshot Backlight discord Thunderbird Mailspring)
+[[ " ${APP_IGNORE[*]} " =~ " ${APPNAME} " ]] && exit 0
+# [[ $APPNAME == "flameshot" ]] || [[ $APPNAME == "Backlight" ]] || \
+# [[ $APPNAME == "discord" ]] || [[ $APPNAME == "" ]] && exit 0
 
 if [[ $APPNAME == "Volume" ]]; then
   paplay $FREEDESKTOP_DIR/audio-volume-change.oga

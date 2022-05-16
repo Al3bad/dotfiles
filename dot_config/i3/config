@@ -25,12 +25,16 @@ set $fg-color           #abb1bf
 set $fg-color-inactive  #6a7280
 
 #################################################
-# --> General config
+# --> General env variables
 #################################################
 # Mod4 is the Windows key on keyboard
 set $mod Mod4
 set $alt Mod1
+set $term kitty
 
+#################################################
+# --> General config
+#################################################
 # Useless Gaps
 gaps inner 20
 
@@ -44,127 +48,118 @@ font pango:FiraCode Nerd Font 10
 include $HOME/.config/i3/i3-workspaces
 include $HOME/.config/i3/i3-windows
 include $HOME/.config/i3/i3-theme
-include $HOME/.config/i3/i3-statusbar
-
-#################################################
-# --> General keybindings
-#################################################
-# reload the configuration file
-bindsym $mod+Shift+c reload
-# restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
-bindsym $mod+Shift+r restart
-# exit i3 (logs you out of your X session)
-bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -B 'Yes, exit i3' 'i3-msg exit'"
-
-# default terminal emulator
-# bindsym $mod+Return exec i3-sensible-terminal
-bindsym $mod+Return exec kitty
-
-# center and resize focused floating window
-bindsym $mod+z exec i3-msg "resize set 1500px 1200px" && i3-msg "move position center"
+# include $HOME/.config/i3/i3-statusbar
+exec_always --no-startup-id $HOME/.config/polybar/launch.sh mybar
 
 #################################################
 # --> Autostart Applications/Scripts
 #################################################
-# Start XDG autostart .desktop files using dex. See also
-# https://wiki.archlinux.org/index.php/XDG_Autostart
-# location of the autostart apps:
-#   /etc/xdg/autostart/:~/.config/autostart/
-# to preview the autostart apps, run:
-#   dex -ad
-exec --no-startup-id dex --autostart --environment i3
-exec --no-startup-id xfsettingsd &
-
-# Keyboard remap script
-exec_always --no-startup-id xmodmap ~/.Xmodmap
-
-# Set the background
-exec_always --no-startup-id feh --bg-scale /home/alabbad/Pictures/wallpapers/img-1.jpg
+# DPI settings
+exec_always --no-startup-id xrandr --dpi 144
 
 # Start the compositer
 exec_always --no-startup-id picom
 
-# Start battery monitoring tool
-exec_always --no-startup-id killall cbatticon;cbatticon -i notification --critical-level 4 --command-critical-level "systemctl suspend"
+# Set the background
+exec_always --no-startup-id feh --bg-scale $HOME/Pictures/wallpapers/img-1.jpg
 
-# Start the compositer
-exec_always --no-startup-id Thunar --daemon
+# Faster key repeat and delay
+exec_always xset r rate 310 40
 
-# Start auto mount daemon
-exec_always --no-startup-id killall udiskie;udiskie
+# Keyboard remap script
+exec_always --no-startup-id xmodmap ~/.Xmodmap
 
-# DPI settings
-exec_always --no-startup-id xrandr --dpi 144
+# Set volume limit 100% and its inital lvl to 0
+exec --no-startup-id pamixer --set-limit 100 && pamixer --set-volume 0 && pkill -RTMIN+10 i3blocks
 
-# Start OneDrive sync
+# Sync Onedrive
 exec --no-startup-id "~/.config/i3/scripts/onedrive.sh"
 
 #################################################
-# --> Lock Screen
+# --> Daemons / Applets
 #################################################
-# xss-lock grabs a logind suspend inhibit lock and will use i3lock to lock the
-# screen before suspend. Use loginctl lock-session to lock your screen.
-exec --no-startup-id xss-lock --transfer-sleep-lock -- ~/.config/i3/scripts/i3lock-pix.sh --nofork
+# XFCE settings daemon
+exec --no-startup-id xfsettingsd &
+
+# Autostart apps daemon
+# to preview the autostart apps, run: `dex -ad`
+exec --no-startup-id dex --autostart --environment i3
+
+# Lockscreen daemon
+exec --no-startup-id xss-lock --transfer-sleep-lock -- $HOME/.config/i3/scripts/i3lock-pix.sh --nofork
+
+# Notification daemon
+exec_always --no-startup-id "killall -q dunst; dunst"
+
+# Autotiling daemon
+exec_always --no-startup-id "killall -q autotiling; autotiling -w 1 2 3"
+
+# Start battery monitoring tool
+# exec_always --no-startup-id "killall -q cbatticon; cbatticon -i notification --critical-level 4 --command-critical-level 'systemctl suspend'"
+
+# Thunar filr explorer daemon
+exec_always --no-startup-id Thunar --daemon
+
+# Auto-mount daemon
+exec_always --no-startup-id "killall -q udiskie; udiskie"
+
+#################################################
+# --> Key bindings
+#################################################
+# Reload i3 config
+bindsym $mod+Shift+c reload
+# Restart i3
+bindsym $mod+Shift+r restart
+# Exit i3 (logs you out of your X session)
+bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -B 'Yes, exit i3' 'i3-msg exit'"
+# Lock screen
 bindsym $mod+$alt+l exec --no-startup-id "~/.config/i3/scripts/i3lock-pix.sh"
 
-#################################################
-# --> Notification
-#################################################
-# Start the notification daemon
-# exec_always --no-startup-id killall deadd-notification-center;deadd-notification-center
-exec_always --no-startup-id killall dunst;dunst
-
-# Show notification center
-# bindsym $mod+n exec --no-startup-id kill -s USR1 $(pidof deadd-notification-center)
+# Show/hide all notifications
 bindsym $mod+n exec --no-startup-id $HOME/.config/dunst/scripts/show-history.sh 5
+bindsym $mod+shift+n exec --no-startup-id dunstctl close-all
 
-#################################################
-# --> Take screenshot
-#################################################
-# Full screenshot
-# bindsym $mod+Shift+f exec --no-startup-id "~/.config/i3/scripts/screenshot.sh -f"
-# Rectangular screenshot
-# bindsym --release $mod+Shift+s exec --no-startup-id "~/.config/i3/scripts/screenshot.sh -s"
-# bindsym --release $mod+Shift+s exec --no-startup-id "maim -s | xclip -selection clipboard -t image/png"
-bindsym --release $mod+Shift+s exec --no-startup-id flameshot gui
+# default terminal emulator
+bindsym $mod+Return exec $term
+# bindsym $mod+Shift+Return exec  $term --directory $(xcwd)
 
-#################################################
-# --> Volume Control
-#################################################
-# Use pamixer to adjust volume in PulseAudio.
-# set $refresh_i3status killall -SIGUSR1 i3status
-# Set volume limit to 100%
-exec --no-startup-id pamixer --set-limit 100
+# center and resize focused floating window
+bindsym $mod+z exec i3-msg "resize set 1500px 1200px" && i3-msg "move position center"
+
+# Lancher/Window switcher - rofi
+# bindsym --release $mod+r exec --no-startup-id "rofi -show combi drun,scripts,power -show-icons"
+bindsym --release $mod+r exec --no-startup-id "rofi -show combi -show-icons -font 'FiraCode Nerd Font 12'"
+bindsym --release $mod+Tab exec --no-startup-id "rofi -show window -config '~/.config/rofi/config-window-switcher.rasi' -kb-row-down 'Alt-Tab,Super+Tab' -kb-row-up 'Alt+ISO_Left_Tab,Super+ISO_Left_Tab' -kb-cancel 'Alt+Escape,Super+Escape,Escape' -kb-accept-entry '!Alt-Tab,Return,!Super+Tab'&"
+bindsym --release $alt+Tab exec --no-startup-id "rofi -show window -config '~/.config/rofi/config-window-switcher.rasi' -kb-row-down 'Alt-Tab,Super+Tab' -kb-row-up 'Alt+ISO_Left_Tab,Super+ISO_Left_Tab' -kb-cancel 'Alt+Escape,Super+Escape,Escape' -kb-accept-entry '!Alt-Tab,Return,!Super+Tab'&"
+bindsym --release $mod+$alt+space exec --no-startup-id rofimoji
+
+# Backlight constrol - xbacklight
+bindsym XF86MonBrightnessUp exec --no-startup-id xbacklight -inc 5 && $HOME/.config/dunst/scripts/backlight.sh
+bindsym XF86MonBrightnessDown exec --no-startup-id xbacklight -dec 5 && $HOME/.config/dunst/scripts/backlight.sh
+
+# Volume control - pamixer
 bindsym XF86AudioRaiseVolume exec --no-startup-id pamixer --increase 6  && pkill -RTMIN+10 i3blocks && $HOME/.config/dunst/scripts/volume.sh
 bindsym XF86AudioLowerVolume exec --no-startup-id pamixer --decrease 5  && pkill -RTMIN+10 i3blocks && $HOME/.config/dunst/scripts/volume.sh
 bindsym XF86AudioMute        exec --no-startup-id pamixer --toggle-mute && pkill -RTMIN+10 i3blocks && $HOME/.config/dunst/scripts/volume.sh
 bindsym XF86AudioMicMute     exec --no-startup-id pactl set-source-mute @DEFAULT_SOURCE@ toggle && pkill -RTMIN+10 i3blocks
 
-# volume to 0 on startup
-exec --no-startup-id pamixer --set-volume 0 && pkill -RTMIN+10 i3blocks
+# Screenshot - flameshot
+bindsym --release $mod+Shift+s exec --no-startup-id flameshot gui
+
+# Scratchpad applications
+bindsym $mod+c exec --no-startup-id "i3run --class calculator --summon -- kitty --class calculator qalc"
+bindsym $mod+x exec --no-startup-id "i3run --class my_terminal --summon -- kitty --class my_terminal"
 
 #################################################
-# --> Backlight Control
+# --> Scratchpad
 #################################################
-bindsym XF86MonBrightnessUp exec --no-startup-id xbacklight -inc 5 && $HOME/.config/dunst/scripts/backlight.sh
-bindsym XF86MonBrightnessDown exec --no-startup-id xbacklight -dec 5 && $HOME/.config/dunst/scripts/backlight.sh
+# Calculator
+for_window [class="calculator"] floating enable
+for_window [class="calculator"] resize set 1200 1000
+for_window [class="calculator"] move position center
 
-#################################################
-# --> Program Luncher/Runner
-#################################################
-# start dmenu (a program launcher)
-# bindsym $mod+r exec "rofi -show drun -show-icons -dpi 144"
-bindsym $mod+r exec "rofi -show combi -combi-modi drun,scripts,power -show-icons -dpi 144"
-
-#################################################
-# --> Calculator - scratchpad
-#################################################
-for_window [class="SpeedCrunch"] mark "calculator", floating enable
-for_window [class="SpeedCrunch"] resize set 1200 1500
-for_window [class="SpeedCrunch"] move position center
-bindsym $mod+c exec i3-msg '[con_mark="calculator"] focus' || speedcrunch
-
-# move the floating calculator to scratchpad workspace
-bindsym $mod+x [con_mark="calculator"] move scratchpad
-bindsym $mod+Shift+x [con_mark="calculator"] scratchpad show
-
+# Terminal
+set $terminal_class "my_terminal"
+for_window [class=$terminal_class] floating enable
+for_window [class=$terminal_class] resize set 1800 1200
+for_window [class=$terminal_class] move position center

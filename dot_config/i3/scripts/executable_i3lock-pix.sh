@@ -9,6 +9,11 @@ BLUE_LIGHT=4d7aa1
 RED=e26a72
 GREEN=6ac389
 
+# Stop media
+playerctl stop
+# Set volume to 0
+pamixer --set-volume 0
+
 # Create the pixelated image
 scrot /tmp/screen.png
 convert /tmp/screen.png -scale 2.5% -scale 4000% -brightness-contrast -30x-30 -modulate 100%,50%,100% /tmp/screen.png

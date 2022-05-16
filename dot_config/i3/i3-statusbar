@@ -5,6 +5,7 @@
 # finds out, if available)
 bar {
   status_command i3blocks -c ~/.config/i3/i3blocks.conf
+  # bindsym button3 exec --no-startup-id jgmenu_run
   position top
   tray_padding 3
   colors {

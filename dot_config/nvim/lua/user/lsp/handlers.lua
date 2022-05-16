@@ -70,7 +70,7 @@ local function lsp_keymaps(bufnr)
   vim.api.nvim_buf_set_keymap(bufnr, "n", "<leader>rn", "<cmd>lua vim.lsp.buf.rename()<CR>", opts)
   vim.api.nvim_buf_set_keymap(bufnr, "n", "gr", "<cmd>lua vim.lsp.buf.references()<CR>", opts)
   -- vim.api.nvim_buf_set_keymap(bufnr, "n", "<leader>ca", "<cmd>lua vim.lsp.buf.code_action()<CR>", opts)
-  -- vim.api.nvim_buf_set_keymap(bufnr, "n", "<leader>f", "<cmd>lua vim.diagnostic.open_float()<CR>", opts)
+  -- vim.api.nvim_buf_set_keymap(bufnr, "n", "<leader>fd", ":lua vim.diagnostic.open_float()<CR>", opts)
   vim.api.nvim_buf_set_keymap(bufnr, "n", "[d", '<cmd>lua vim.diagnostic.goto_prev({ border = "rounded" })<CR>', opts)
   vim.api.nvim_buf_set_keymap(
     bufnr,
@@ -85,6 +85,16 @@ local function lsp_keymaps(bufnr)
 end
 
 M.on_attach = function(client, bufnr)
+  -- attach "illuminate" plugin if its installed
+  local status_ok, illuminate = pcall(require, "illuminate")
+  if status_ok then
+    illuminate.on_attach(client)
+      vim.api.nvim_command [[ hi def link LspReferenceText CursorLine ]]
+      vim.api.nvim_command [[ hi def link LspReferenceWrite CursorLine ]]
+      vim.api.nvim_command [[ hi def link LspReferenceRead CursorLine ]]
+  end
+
+  -- other config
   if client.name == "tsserver" then
     -- disable formatting for this server to avoid convflect with "null-ls"
     client.resolved_capabilities.document_formatting = false

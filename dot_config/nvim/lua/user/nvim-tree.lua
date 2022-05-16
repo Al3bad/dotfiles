@@ -42,7 +42,7 @@ nvim_tree.setup {
     "dashboard",
     "alpha",
   },
-  auto_close = true,
+  -- auto_close = true, -- this option has been removed
   open_on_tab = false,
   hijack_cursor = false,
   update_cwd = true,
@@ -140,3 +140,6 @@ nvim_tree.setup {
     tree_width = 30,
   },
 }
+
+-- autoclose when nvim-tree is the last window
+vim.cmd([[autocmd BufEnter * ++nested if winnr('$') == 1 && bufname() == 'NvimTree_' . tabpagenr() | quit | endif]])

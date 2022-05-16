@@ -13,8 +13,8 @@ local options = {
   --
   signcolumn = "yes",                      -- always show the sign column, otherwise it would shift the text each time
   numberwidth = 4,                         -- set number column width to 2 {default 4}
-  scrolloff = 8,                           -- is one of my fav
-  sidescrolloff = 8,
+  scrolloff = 2,                           -- is one of my fav
+  sidescrolloff = 4,
   --
   expandtab = true,                        -- convert tabs to spaces
   shiftwidth = 2,                          -- the number of spaces inserted for each indentation
@@ -79,6 +79,8 @@ vim.g.maplocalleader = " "
 --   visual_block_mode = "x",
 --   term_mode = "t",
 --   command_mode = "c",
+
+keymap("n", "<leader><leader>r", ":source ~/.config/nvim/init.lua<CR>", opts)
 
 -- Normal --
 -- Toggle spell checkier
@@ -158,6 +160,10 @@ require "user.gitsigns"
 require "user.toggleterm"
 require "user.presence"
 
+-- vim-hexokinase plugin
+vim.g.Hexokinase_highlighters = { "backgroundfull" }
+vim.g.Hexokinase_optInPatterns = "full_hex,triple_hex,rgb,rgba,hsl,hsla"
+
 -------------------------------------------------
 -- --> Plugins keymaps
 -------------------------------------------------
@@ -184,36 +190,13 @@ keymap("n", "<leader>fh", ":lua require'telescope.builtin'.help_tags(require('te
 keymap("n", "<leader>fm", ":lua require('telescope').extensions.media_files.media_files()<CR>", opts)
 keymap("n", "<leader>sg", ":lua require'telescope.builtin'.spell_suggest(require('telescope.themes').get_ivy())<CR>", opts)
 
+keymap('n', '<a-n>', ':lua require"illuminate".next_reference{wrap=true}<cr>', opts)
+keymap('n', '<a-p>', ':lua require"illuminate".next_reference{reverse=true,wrap=true}<cr>', opts)
 
 -------------------------------------------------
--- --> Matlab
+-- --> user defined functions
 -------------------------------------------------
--- autocmd BufNewFile,BufRead *.m set ft=matlab
-
-local toggleterm = require("toggleterm.terminal");
-
-function open_matlab()
-  if #toggleterm.get_all() == 0 and toggleterm.get_toggled_id(1) == nil then
-    vim.cmd(":1TermExec cmd='matlab -nodesktop -nosplash' size=10 direction=horizontal")
-  else
-    print("Matlab is running")
-  end
+function remove_trailling_whitespaces ()
+  vim.api.nvim_command("%s/\\s\\+$//e")
 end
-
-function run_matlab_cmd()
-  if #toggleterm.get_all() > 0 and toggleterm.get_toggled_id(1) ~= nil then
-    vim.cmd(":1TermExec cmd='run(\"%:p\")'")
-  else
-    print("Matlab is not running")
-  end
-end
-
-vim.cmd([[
-autocmd BufEnter,BufWinEnter *.m nmap <leader>tms :lua open_matlab()<CR>
-autocmd BufEnter,BufWinEnter *.m nmap <leader>tmr :lua run_matlab_cmd()<CR>
-
-autocmd BufLeave *.m nmap <leader>tms <Nop>
-autocmd BufLeave *.m nmap <leader>tmr <Nop>
-"]])
-
 

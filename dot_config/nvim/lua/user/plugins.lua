@@ -46,10 +46,15 @@ return packer.startup(function(use)
   use "lambdalisue/suda.vim" -- Write file with sudo (:SudoWrite)
   use "moll/vim-bbye" -- Delete buffers & close files in without closing windows or messing the layout
   use "lukas-reineke/indent-blankline.nvim"
-  use "mg979/vim-visual-multi"
-  -- use "ahmedkhalf/project.nvim" -- Projecect managment tool
-  -- use "lewis6991/impatient.nvim" -- Speed up vim startup
+  use "mg979/vim-visual-multi" -- multi cursor
+  use "RRethy/vim-illuminate" -- highlight same words under the cursor
+  use {
+    "rrethy/vim-hexokinase",  -- Display color
+    run = "make hexokinase"
+  }
   -- use "goolord/alpha-nvim" -- Welcome page
+  -- use "ahmedkhalf/project.nvim" -- Project managment tool
+  -- use "lewis6991/impatient.nvim" -- Speed up vim startup
   -- use "folke/which-key.nvim" -- Show kay maps in a window
   
   -- Sesstion management
@@ -63,6 +68,7 @@ return packer.startup(function(use)
   use "kyazdani42/nvim-tree.lua"
 
   -- Comments & autopairs & surround
+  -- use { "numToStr/Comment.nvim", commit = "0aaea32f27315e2a99ba4c12ab9def5cbb4842e4" } -- for neovim version < 7
   use "numToStr/Comment.nvim" -- Easily comment stuff
   use "JoosepAlviste/nvim-ts-context-commentstring"
   use "folke/todo-comments.nvim"
@@ -101,7 +107,7 @@ return packer.startup(function(use)
   use "nvim-telescope/telescope.nvim"
   use "nvim-telescope/telescope-media-files.nvim"
 
-  -- Treesitter
+  -- Treesitter & syntax highlighting
   use {
     "nvim-treesitter/nvim-treesitter",
     run = ":TSUpdate",
@@ -113,6 +119,9 @@ return packer.startup(function(use)
   -- Monitoring (Discord & Wakatime)
   use "wakatime/vim-wakatime" -- WakaTime
   use "andweeb/presence.nvim" -- Discord presence
+
+  -- For matlab (uninstall it when the semester ends)
+  use "MortenStabenau/matlab-vim"
 
   -- Automatically set up your configuration after cloning packer.nvim
   -- Put this at the end after all plugins

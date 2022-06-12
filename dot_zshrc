@@ -1,3 +1,6 @@
+# Eanble completion
+autoload -U compinit; compinit
+
 #################################################
 # --> Environment Variable
 #################################################

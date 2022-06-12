@@ -63,9 +63,6 @@ exec_always --no-startup-id picom
 # Set the background
 exec_always --no-startup-id feh --bg-scale $HOME/Pictures/wallpapers/img-1.jpg
 
-# Faster key repeat and delay
-exec_always xset r rate 310 40
-
 # Keyboard remap script
 exec_always --no-startup-id xmodmap ~/.Xmodmap
 
@@ -143,6 +140,11 @@ bindsym XF86AudioLowerVolume exec --no-startup-id pamixer --decrease 5  && pkill
 bindsym XF86AudioMute        exec --no-startup-id pamixer --toggle-mute && pkill -RTMIN+10 i3blocks && $HOME/.config/dunst/scripts/volume.sh
 bindsym XF86AudioMicMute     exec --no-startup-id pactl set-source-mute @DEFAULT_SOURCE@ toggle && pkill -RTMIN+10 i3blocks
 
+bindsym Control+XF86AudioPlay exec mpc toggle
+# bindsym XF86AudioStop exec mpc stop
+bindsym Control+$mod+$alt+Left exec mpc prev
+bindsym Control+$mod+$alt+Right exec mpc next
+
 # Screenshot - flameshot
 bindsym --release $mod+Shift+s exec --no-startup-id flameshot gui
 
@@ -163,3 +165,10 @@ set $terminal_class "my_terminal"
 for_window [class=$terminal_class] floating enable
 for_window [class=$terminal_class] resize set 1800 1200
 for_window [class=$terminal_class] move position center
+
+#################################################
+
+# Faster key repeat and delay
+exec_always xset r rate 310 40
+
+

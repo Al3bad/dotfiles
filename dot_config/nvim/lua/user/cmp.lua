@@ -8,9 +8,14 @@ if not snip_status_ok then
   return
 end
 
+luasnip.config.set_config({
+  region_check_events = "CursorMoved",
+})
+
 require("luasnip/loaders/from_vscode").lazy_load()
 require("luasnip/loaders/from_lua").lazy_load()
 require("user.snippets.verilog")
+
 
 local check_backspace = function()
   local col = vim.fn.col "." - 1
@@ -54,8 +59,15 @@ cmp.setup {
     end,
   },
   mapping = {
-    ["<C-k>"] = cmp.mapping.select_prev_item(),
-		["<C-j>"] = cmp.mapping.select_next_item(),
+    --[[ ["<C-k>"] = cmp.mapping.select_prev_item(), ]]
+    ["<C-k>"] = cmp.mapping(function() 
+      if cmp.visible() then
+        cmp.abort() 
+      else
+        cmp.complete() 
+      end
+    end, {"i"}),
+    ["<C-j>"] = cmp.mapping.select_next_item(),
     ["<C-b>"] = cmp.mapping(cmp.mapping.scroll_docs(-1), { "i", "c" }),
     ["<C-f>"] = cmp.mapping(cmp.mapping.scroll_docs(1), { "i", "c" }),
     ["<C-Space>"] = cmp.mapping(cmp.mapping.complete(), { "i", "c" }),
@@ -72,10 +84,10 @@ cmp.setup {
         cmp.select_next_item()
       elseif luasnip.expandable() then
         luasnip.expand()
-      elseif luasnip.expand_or_jumpable() then
+      elseif luasnip.expand_or_locally_jumpable() then
         luasnip.expand_or_jump()
-      elseif check_backspace() then
-        fallback()
+      -- elseif check_backspace() then
+      --   fallback()
       else
         fallback()
       end
@@ -131,3 +143,5 @@ cmp.setup {
     native_menu = false,
   },
 }
+
+

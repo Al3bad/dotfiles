@@ -19,7 +19,10 @@ local options = {
   expandtab = true,                        -- convert tabs to spaces
   shiftwidth = 2,                          -- the number of spaces inserted for each indentation
   tabstop = 2,                             -- insert 2 spaces for a tab
-  showtabline = 2,                         -- always show tabs
+  laststatus = 0,                          -- hide last status
+  ruler = false,                           -- hide ruler
+  showcmd = false,                         -- hide cmd
+  -- showtabline = 2,                         -- always show tabs
   --
   smartcase = true,                        -- smart case
   smartindent = true,                      -- make indenting smarter again
@@ -30,7 +33,7 @@ local options = {
   mouse = "a",                             -- allow the mouse to be used in neovim
   fileencoding = "utf-8",                  -- the encoding written to a file
   clipboard = "unnamedplus",               -- allows neovim to access the system clipboard
-  cmdheight = 2,                           -- more space in the neovim command line for displaying messages
+  -- cmdheight = 2,                           -- more space in the neovim command line for displaying messages
   completeopt = { "menuone", "noselect" }, -- mostly just for cmp
   conceallevel = 0,                        -- so that `` is visible in markdown files
   hlsearch = true,                         -- highlight all matches on previous search pattern
@@ -48,6 +51,11 @@ local options = {
 }
 
 vim.opt.shortmess:append "c"
+
+-- Clean up interface
+vim.o.fillchars='eob: '                   -- Hide ~ for blank lines
+vim.cmd [[set statusline=-]]
+vim.cmd [[set fillchars+=stlnc:-]]
 
 for k, v in pairs(options) do
   vim.opt[k] = v
@@ -154,15 +162,12 @@ require "user.comments"
 require "user.todo-comments"
 require "user.nvim-tree"
 require "user.indentline"
-require "user.bufferline"
-require "user.lualine"
+-- require "user.bufferline"
+-- require "user.lualine"
 require "user.gitsigns"
 require "user.toggleterm"
 require "user.presence"
-
--- vim-hexokinase plugin
-vim.g.Hexokinase_highlighters = { "backgroundfull" }
-vim.g.Hexokinase_optInPatterns = "full_hex,triple_hex,rgb,rgba,hsl,hsla"
+require "user.hexokinase"
 
 -------------------------------------------------
 -- --> Plugins keymaps
@@ -170,12 +175,11 @@ vim.g.Hexokinase_optInPatterns = "full_hex,triple_hex,rgb,rgba,hsl,hsla"
 
 -- File explorer (nvim-tree plugin) --
 keymap("n", "<C-b>",":NvimTreeToggle<CR>", opts)
--- nnoremap <leader>r :NvimTreeRefresh<CR>
--- nnoremap <leader>n :NvimTreeFindFile<CR>
+keymap("n", "<leader>r",":NvimTreeRefresh<CR>", opts)
+keymap("n", "<leader>n",":NvimTreeFindFile<CR>", opts)
 
 -- Terminal (toggleterm plugin) --
 keymap('n', '<leader>th', ":ToggleTerm size=10 direction=horizontal<CR>", opts)
-keymap('n', '<leader>tf', ":ToggleTerm direction=float<CR>", opts)
 keymap('n', '<leader>tf', ":ToggleTerm direction=float<CR>", opts)
 
 -- Telescope (telescope plugin) --
@@ -190,6 +194,7 @@ keymap("n", "<leader>fh", ":lua require'telescope.builtin'.help_tags(require('te
 keymap("n", "<leader>fm", ":lua require('telescope').extensions.media_files.media_files()<CR>", opts)
 keymap("n", "<leader>sg", ":lua require'telescope.builtin'.spell_suggest(require('telescope.themes').get_ivy())<CR>", opts)
 
+-- Illuminate plugin --
 keymap('n', '<a-n>', ':lua require"illuminate".next_reference{wrap=true}<cr>', opts)
 keymap('n', '<a-p>', ':lua require"illuminate".next_reference{reverse=true,wrap=true}<cr>', opts)
 

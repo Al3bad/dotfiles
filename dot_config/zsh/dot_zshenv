@@ -1,17 +1,20 @@
-if command -v nvim &> /dev/null
-then
-    export EDITOR=nvim
+if [ command -v nvim &> /dev/null ]; then
+  export VISUAL=nvim
+  export EDITOR=nvim
 else
-    export EDITOR=vim
+  export VISUAL=vim
+  export EDITOR=vim
 fi
 
-export PATH="/usr/local/opt/coreutils/libexec/gnubin:$PATH" # GNU commands
-export PATH=~/.local/bin:$PATH                              # ptSh & any tool installed in this dir
-export PATH=${PATH}:/usr/local/mysql/bin/                   # MySQL
+# Enable colored output for less and man commands
+export LESS='-R --use-color -Dd+r$Du+b'
+export MANPAGER="less -R --use-color -Dd+r -Du+b"
 
-export NVM_DIR="$HOME/.nvm"     # NVM - NodeJS version manager
+# WakaTime nvim plugin
+export WAKATIME_HOME="$HOME/.local/share/vim-wakatime"
 
-# Export icons for "lf" file manager
-LF_ICONS_PATH="$HOME/.config/lf/icons"
-[ -f $LF_ICONS_PATH ] && source $LF_ICONS_PATH
+# Shell history configurations
+export HISTFILE="$HOME/.cache/.zsh_history"
+export HISTSIZE=100
+export SAVEHINT=100
 

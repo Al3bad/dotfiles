@@ -95,7 +95,7 @@ M.on_attach = function(client, bufnr)
   end
 
   -- other config
-  if client.name == "tsserver" then
+  if client.name == "tsserver" or client.name == "volar" then
     -- disable formatting for this server to avoid convflect with "null-ls"
     client.resolved_capabilities.document_formatting = false
   end
@@ -114,6 +114,6 @@ if not status_ok then
   return
 end
 
-M.capabilities = cmp_nvim_lsp.update_capabilities(capabilities)
+M.capabilities = cmp_nvim_lsp.default_capabilities(capabilities)
 
 return M

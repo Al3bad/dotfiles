@@ -1,60 +1,33 @@
-# Eanble completion
-autoload -U compinit; compinit
+ZSH=$HOME/.config/zsh
 
-#################################################
-# --> Environment Variable
-#################################################
+# env
+source $ZSH/.zshenv
 
-export ZSH="${HOME}/.config/zsh"                            # ZSH configuration path
-export HISTSIZE=100
-export SAVEHIST=100
-export HISTFILE=${ZSH}/.zsh_history
+# aliases
+source $ZSH/aliases.zsh
 
-source ${ZSH}/.zshenv
-
-#################################################
-# --> NeoFetch (if available)
-#################################################
-
-if command -v neofetch &> /dev/null
-then
-    neofetch
+# ZSH plugins
+if [ -x "$(command -v brew)" ] && [ $(uname -s) = "Darwin" ]; then
+    # MacOS only
+    BREW_PREFIX=$(brew --prefix)
+    FPATH=$BREW_PREFIX/share/zsh-completions:$FPATH
+    source $BREW_PREFIX/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+    source $BREW_PREFIX/share/zsh-autosuggestions/zsh-autosuggestions.zsh
+  else
+    source /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+    source /usr/local/share/zsh-autosuggestions/zsh-autosuggestions.zsh
 fi
 
-#################################################
-# --> Eanble PowerLevel10k instant prompt
-#################################################
+source $ZSH/plugins/sudo.plugin.zsh
 
-# Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
-# Initialization code that may require console input (password prompts, [y/n]
-# confirmations, etc.) must go above this block; everything else may go below.
-if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
-  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
-fi
+# Enable completion
+autoload -Uz compinit; compinit
 
-#################################################
-# --> Plugins
-#################################################
+# ZSH Options
+setopt hist_ignore_space      # ignore commands that start with space
 
-source ${ZSH}/plugins/sudo.plugin.zsh
-source ${ZSH}/plugins/zsh-autosuggestions.plugin.zsh
-source ${ZSH}/plugins/zsh-syntax-highlighting.plugin.zsh
-source ${ZSH}/plugins/powerlevel10k.plugin.zsh
-source ${ZSH}/plugins/z.plugin.zsh
-test -e "${ZSH}/plugins/iterm2-shell-integration.zsh" && source "${ZSH}/plugins/iterm2-shell-integration.zsh"
+# Prompt
+eval "$(starship init zsh)"
 
-
-#################################################
-# --> Aliases
-#################################################
-
-source ${ZSH}/aliases.zsh
-source ${ZSH}/profile_aliases.zsh
-
-#################################################
-# --> nvm (if available)
-#################################################
-
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
-
+# Neofetch
+neofetch

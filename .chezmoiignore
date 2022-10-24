@@ -1,5 +1,4 @@
 README.md
-{{- if ne .chezmoi.osRelease.name "Arch Linux" }}
 .Xresources
 .xinitrc
 /.config/i3
@@ -7,4 +6,3 @@ README.md
 /.config/rofi
 /.config/kitty
 /.config/picom
-{{- end }}

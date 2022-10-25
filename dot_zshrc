@@ -13,6 +13,9 @@ if [ -x "$(command -v brew)" ] && [ $(uname -s) = "Darwin" ]; then
     FPATH=$BREW_PREFIX/share/zsh-completions:$FPATH
     source $BREW_PREFIX/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
     source $BREW_PREFIX/share/zsh-autosuggestions/zsh-autosuggestions.zsh
+  elif [ -f /etc/os-release ] && [ "$(cat /etc/os-release | grep ^NAME | awk -F '"' '$0=$2')" = "Arch Linux" ]; then
+  source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+  source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
   else
     source /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
     source /usr/local/share/zsh-autosuggestions/zsh-autosuggestions.zsh

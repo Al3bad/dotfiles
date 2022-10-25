@@ -73,7 +73,7 @@ return packer.startup(function(use)
   use "tpope/vim-surround"          -- Surround text with char/str (ys<>, cs<>, ds<>, vS<>)
 
   -- Statusline
-  -- use "akinsho/bufferline.nvim"
+  use "akinsho/bufferline.nvim"
   -- use "nvim-lualine/lualine.nvim"
 
   -- Terminal

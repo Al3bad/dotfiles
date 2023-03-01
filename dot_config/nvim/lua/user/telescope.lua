@@ -5,7 +5,9 @@ if not status_ok then
 end
 
 -- Extensions setup
-telescope.load_extension("media_files")
+pcall(telescope.load_extension, "media_files")
+pcall(telescope.load_extension, "fzf")
+
 
 -- Telescope setup
 local actions = require "telescope.actions"

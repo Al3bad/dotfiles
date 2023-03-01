@@ -40,25 +40,82 @@ packer.init {
 
 -- Install your plugins here
 return packer.startup(function(use)
+  -- Package manager
   use "wbthomason/packer.nvim"      -- Have packer manage itself
+
+  -- Theme and UI relatd stuff
+  use 'joshdick/onedark.vim'
+  use "akinsho/bufferline.nvim"
+  use "nvim-lualine/lualine.nvim"
+  use "lukas-reineke/indent-blankline.nvim" -- Add indentation guides
+  use 'tpope/vim-sleuth'                    -- Detect tabstop and shiftwidth automatically
+  use "RRethy/vim-illuminate"               -- highlight same words under the cursor
+  use "nvim-lua/popup.nvim"                 -- An implementation of the Popup API from vim in Neovim
+  use {
+    "brenoprata10/nvim-highlight-colors",
+    config = function() require("nvim-highlight-colors").setup {} end
+  }
+
+  -- LSP
+  use {
+    "neovim/nvim-lspconfig",
+    requires = {
+      -- Automatically install LSPs to stdpath for neovim
+      'williamboman/mason.nvim',
+      'williamboman/mason-lspconfig.nvim',
+      -- Useful status updates for LSP
+      'j-hui/fidget.nvim',
+      -- Additional lua configuration, makes nvim stuff amazing
+      'folke/neodev.nvim',
+    }
+  }
+  use {
+    "ray-x/lsp_signature.nvim",
+    commit = "055b82b98e3c2e4d3ca3300d0b453674ce166237"
+  }
+
+  -- Autocompletion
+  use {
+    "hrsh7th/nvim-cmp",
+    requires = {
+     "hrsh7th/cmp-nvim-lsp",          -- source for neovim builtin LSP client
+     "saadparwaiz1/cmp_luasnip",      -- snippet completions
+     "hrsh7th/cmp-buffer",            -- buffer completions
+     "hrsh7th/cmp-path",              -- path completions
+     "hrsh7th/cmp-cmdline",           -- cmdline completions
+     -- Snippet engine
+     "L3MON4D3/LuaSnip",
+     -- Snippets
+     -- "rafamadriz/friendly-snippets"  -- a bunch of snippets to use
+    }
+  }
+
+  -- Highlight, edit and navigate code (treesitter)
+  use {
+    "nvim-treesitter/nvim-treesitter",
+    run = ":TSUpdate",
+  }
+
+  -- Additional text objects via treesitter
+  use {
+    'nvim-treesitter/nvim-treesitter-textobjects',
+    after = 'nvim-treesitter',
+  }
+
+
   use "lewis6991/impatient.nvim"    -- Speed up vim startup
-  use "nvim-lua/popup.nvim"         -- An implementation of the Popup API from vim in Neovim
   use "nvim-lua/plenary.nvim"       -- Useful lua functions used ny lots of plugins
   use "lambdalisue/suda.vim"        -- Write file with sudo (:SudoWrite)
   use "moll/vim-bbye"               -- Delete buffers & close files in without closing windows or messing the layout
-  use "lukas-reineke/indent-blankline.nvim"
   use "mg979/vim-visual-multi"      -- multi cursor
-  use "RRethy/vim-illuminate"       -- highlight same words under the cursor
-  use {
-    "rrethy/vim-hexokinase",        -- Display color
-    run = "make hexokinase"
-  }
+  use "junegunn/fzf.vim"            -- fzf
+  -- use {
+  --   "rrethy/vim-hexokinase",        -- Display color
+  --   run = "make hexokinase"
+  -- }
   -- use "goolord/alpha-nvim" -- Welcome page
   -- use "ahmedkhalf/project.nvim" -- Project managment tool
   -- use "folke/which-key.nvim" -- Show kay maps in a window
-
-  -- Colorschemes
-  use 'joshdick/onedark.vim'
 
   -- File explorer / tree
   use "kyazdani42/nvim-web-devicons"
@@ -66,45 +123,35 @@ return packer.startup(function(use)
 
   -- Comments & autopairs & surround
   use "numToStr/Comment.nvim"       -- Easily comment stuff
-  use "JoosepAlviste/nvim-ts-context-commentstring"
+  use {
+    "JoosepAlviste/nvim-ts-context-commentstring"
+  }
   use "folke/todo-comments.nvim"    -- Highlight todo comments
   use "windwp/nvim-autopairs"       -- Autopairs, integrates with both cmp and treesitter
-  use "windwp/nvim-ts-autotag"      -- Auto pair html tags
+  use {
+    "windwp/nvim-ts-autotag"
+  }      -- Auto pair html tags
   use "tpope/vim-surround"          -- Surround text with char/str (ys<>, cs<>, ds<>, vS<>)
-
-  -- Statusline
-  use "akinsho/bufferline.nvim"
-  -- use "nvim-lualine/lualine.nvim"
 
   -- Terminal
   use "akinsho/toggleterm.nvim"
 
-  -- cmp plugins
-  use "hrsh7th/nvim-cmp"              -- The completion plugin
-  use "hrsh7th/cmp-buffer"            -- buffer completions
-  use "hrsh7th/cmp-path"              -- path completions
-  use "hrsh7th/cmp-cmdline"           -- cmdline completions
-  use "saadparwaiz1/cmp_luasnip"      -- snippet completions
-  use "hrsh7th/cmp-nvim-lsp"
-
-  -- snippets
-  use "L3MON4D3/LuaSnip"              --snippet engine
-  use "rafamadriz/friendly-snippets"  -- a bunch of snippets to use
-
-  -- LSP
-  use "neovim/nvim-lspconfig"           -- enable LSP
-  use "ray-x/lsp_signature.nvim"
-  use "williamboman/nvim-lsp-installer" -- simple to use language server installer
+  -- use "williamboman/nvim-lsp-installer" -- simple to use language server installer
   use "jose-elias-alvarez/null-ls.nvim" -- for formatters and linters
+  use { 'mhartington/formatter.nvim' }
 
-  -- Telescope
-  use "nvim-telescope/telescope.nvim"
+  -- Fuzzy finder
+  use {
+    "nvim-telescope/telescope.nvim",
+    branch = "0.1.x",
+    requires = { "nvim-lua/plenary.nvim" }
+  }
   use "nvim-telescope/telescope-media-files.nvim"
 
-  -- Treesitter & syntax highlighting
-  use {
-    "nvim-treesitter/nvim-treesitter",
-    run = ":TSUpdate",
+  -- Fuzzy Finder Algorithm which requires local dependencies to be built. Only load if `make` is available
+  use { 'nvim-telescope/telescope-fzf-native.nvim',
+    run = 'make',
+    cond = vim.fn.executable 'make' == 1
   }
 
   -- Git

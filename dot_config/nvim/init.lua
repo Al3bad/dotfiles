@@ -3,59 +3,59 @@
 -------------------------------------------------
 
 local options = {
-  backup = false,                          -- creates a backup file
-  writebackup = false,                     -- if a file is being edited by another program (or was written to file while editing with another program), it is not allowed to be edited
-  swapfile = false,                        -- creates a swapfile
+  backup = false, -- creates a backup file
+  writebackup = false, -- if a file is being edited by another program (or was written to file while editing with another program), it is not allowed to be edited
+  swapfile = true, -- creates a swapfile
   --
-  number = true,                           -- set numbered lines
-  relativenumber = false,                  -- set relative numbered lines
-  wrap = false,                            -- display lines as one long line
+  number = true, -- set numbered lines
+  relativenumber = false, -- set relative numbered lines
+  wrap = false, -- display lines as one long line
   --
-  signcolumn = "yes",                      -- always show the sign column, otherwise it would shift the text each time
-  numberwidth = 4,                         -- set number column width to 2 {default 4}
-  scrolloff = 2,                           -- is one of my fav
+  signcolumn = "yes", -- always show the sign column, otherwise it would shift the text each time
+  numberwidth = 4, -- set number column width to 2 {default 4}
+  scrolloff = 2, -- is one of my fav
   sidescrolloff = 4,
   --
-  expandtab = true,                        -- convert tabs to spaces
-  shiftwidth = 2,                          -- the number of spaces inserted for each indentation
-  tabstop = 2,                             -- insert 2 spaces for a tab
-  laststatus = 0,                          -- hide last status
-  ruler = false,                           -- hide ruler
-  showcmd = false,                         -- hide cmd
+  expandtab = true, -- convert tabs to spaces
+  shiftwidth = 2, -- the number of spaces inserted for each indentation
+  tabstop = 2, -- insert 2 spaces for a tab
+  laststatus = 0, -- hide last status
+  -- ruler = false,                           -- hide ruler
+  -- showcmd = false,                         -- hide cmd
   -- showtabline = 2,                         -- always show tabs
   --
-  smartcase = true,                        -- smart case
-  smartindent = true,                      -- make indenting smarter again
+  smartcase = true, -- smart case
+  smartindent = true, -- make indenting smarter again
+  breakindent = true, -- enable break indent
   --
   list = true,
   listchars = { tab = '\\', trail = '.' },
   --
-  mouse = "a",                             -- allow the mouse to be used in neovim
-  fileencoding = "utf-8",                  -- the encoding written to a file
-  clipboard = "unnamedplus",               -- allows neovim to access the system clipboard
+  mouse = "a", -- allow the mouse to be used in neovim
+  fileencoding = "utf-8", -- the encoding written to a file
+  clipboard = "unnamedplus", -- allows neovim to access the system clipboard
   -- cmdheight = 2,                           -- more space in the neovim command line for displaying messages
   completeopt = { "menuone", "noselect" }, -- mostly just for cmp
-  conceallevel = 0,                        -- so that `` is visible in markdown files
-  hlsearch = true,                         -- highlight all matches on previous search pattern
-  ignorecase = true,                       -- ignore case in search patterns
-  pumheight = 10,                          -- pop up menu height
-  showmode = false,                        -- we don't need to see things like -- INSERT -- anymore
-  splitbelow = true,                       -- force all horizontal splits to go below current window
-  splitright = true,                       -- force all vertical splits to go to the right of current window
-  termguicolors = true,                    -- set term gui colors (most terminals support this)
+  conceallevel = 0, -- so that `` is visible in markdown files
+  hlsearch = true, -- highlight all matches on previous search pattern
+  ignorecase = true, -- ignore case in search patterns
+  pumheight = 10, -- pop up menu height
+  -- showmode = false,                        -- we don't need to see things like -- INSERT -- anymore
+  splitbelow = true, -- force all horizontal splits to go below current window
+  splitright = true, -- force all vertical splits to go to the right of current window
+  termguicolors = true, -- set term gui colors (most terminals support this)
   -- timeoutlen = 100,                        -- time to wait for a mapped sequence to complete (in milliseconds)
-  undofile = true,                         -- enable persistent undo
-  updatetime = 300,                        -- faster completion (4000ms default)
-  cursorline = true,                       -- highlight the current line
-  guifont = "monospace:h17",               -- the font used in graphical neovim applications
+  undofile = true, -- enable persistent undo
+  updatetime = 300, -- faster completion (4000ms default)
+  cursorline = true, -- highlight the current line
+  guifont = "monospace:h17", -- the font used in graphical neovim applications
 }
 
+-- vim.opt.directory = '$HOME/.cache/nvim/swapfiles//'
 vim.opt.shortmess:append "c"
 
 -- Clean up interface
-vim.o.fillchars='eob: '                   -- Hide ~ for blank lines
-vim.cmd [[set statusline=-]]
-vim.cmd [[set fillchars+=stlnc:-]]
+vim.o.fillchars = 'eob: ' -- Hide ~ for blank lines
 
 for k, v in pairs(options) do
   vim.opt[k] = v
@@ -63,7 +63,7 @@ end
 
 vim.cmd "set whichwrap+=<,>,[,],h,l"
 vim.cmd [[set iskeyword+=-]]
-vim.cmd [[set formatoptions-=cro]] -- TODO: this doesn't seem to work
+-- vim.cmd [[set formatoptions-=cro]] -- TODO: this doesn't seem to work
 
 -------------------------------------------------
 -- --> General keymaps
@@ -92,7 +92,7 @@ keymap("n", "<leader><leader>r", ":source ~/.config/nvim/init.lua<CR>", opts)
 
 -- Normal --
 -- Toggle spell checkier
-keymap("n", "<leader>ss", ":setlocal spell!<CR>", opts)
+keymap("n", "<leader>se", ":setlocal spell!<CR>", opts)
 
 -- Split windows/panes
 keymap("n", "ss", ":split<CR>", opts)
@@ -141,6 +141,17 @@ keymap("x", "K", ":move '<-2<CR>gv-gv", opts)
 keymap("x", "<A-j>", ":move '>+1<CR>gv-gv", opts)
 keymap("x", "<A-k>", ":move '<-2<CR>gv-gv", opts)
 
+-- [[ Highlight on yank ]]
+-- See `:help vim.highlight.on_yank()`
+-- local highlight_group = vim.api.nvim_create_augroup('YankHighlight', { clear = true })
+-- vim.api.nvim_create_autocmd('TextYankPost', {
+--   callback = function()
+--     vim.highlight.on_yank()
+--   end,
+--   group = highlight_group,
+--   pattern = '*',
+-- })
+
 
 -------------------------------------------------
 -- --> Plugins
@@ -163,20 +174,43 @@ require "user.todo-comments"
 require "user.nvim-tree"
 require "user.indentline"
 require "user.bufferline"
--- require "user.lualine"
+require "user.lualine"
 require "user.gitsigns"
 require "user.toggleterm"
 require "user.presence"
-require "user.hexokinase"
+-- require "user.hexokinase"
+require('formatter').setup({
+  logging = false,
+  filetype = {
+    ["*"] = {
+      -- prettierd
+      function()
+        return {
+          exe = "prettierd",
+          args = { vim.api.nvim_buf_get_name(0) },
+          stdin = true
+        }
+      end
+    },
+    -- other formatters ...
+  }
+})
+
+vim.cmd [[
+augroup FormatAutogroup
+  autocmd!
+  autocmd BufWritePost * FormatWrite
+augroup END
+]]
 
 -------------------------------------------------
 -- --> Plugins keymaps
 -------------------------------------------------
 
 -- File explorer (nvim-tree plugin) --
-keymap("n", "<C-b>",":NvimTreeToggle<CR>", opts)
-keymap("n", "<leader>r",":NvimTreeRefresh<CR>", opts)
-keymap("n", "<leader>n",":NvimTreeFindFile<CR>", opts)
+keymap("n", "<C-b>", ":NvimTreeToggle<CR>", opts)
+keymap("n", "<leader>r", ":NvimTreeRefresh<CR>", opts)
+keymap("n", "<leader>n", ":NvimTreeFindFile<CR>", opts)
 
 -- Terminal (toggleterm plugin) --
 keymap('n', '<leader>th', ":ToggleTerm size=10 direction=horizontal<CR>", opts)
@@ -187,12 +221,16 @@ keymap('n', '<leader>tf', ":ToggleTerm direction=float<CR>", opts)
 -- nnoremap <leader>fg :Telescope live_grep<cr>
 -- nnoremap <leader>fb :Telescope buffers<cr>
 -- nnoremap <leader>fh :Telescope help_tags<cr>
-keymap("n", "<leader>ff", ":lua require'telescope.builtin'.find_files(require('telescope.themes').get_ivy())<CR>", opts)
-keymap("n", "<leader>fg", ":lua require'telescope.builtin'.live_grep(require('telescope.themes').get_ivy())<CR>", opts)
-keymap("n", "<leader>fb", ":lua require'telescope.builtin'.buffers(require('telescope.themes').get_ivy())<CR>", opts)
-keymap("n", "<leader>fh", ":lua require'telescope.builtin'.help_tags(require('telescope.themes').get_ivy())<CR>", opts)
-keymap("n", "<leader>fm", ":lua require('telescope').extensions.media_files.media_files()<CR>", opts)
-keymap("n", "<leader>sg", ":lua require'telescope.builtin'.spell_suggest(require('telescope.themes').get_ivy())<CR>", opts)
+keymap("n", "<leader>sf", ":lua require'telescope.builtin'.find_files()<CR>", { desc = '[S]earch [F]iles' })
+keymap('n', '<leader>sw', ":lua require('telescope.builtin').grep_string()<CR>", { desc = '[S]earch current [W]ord' })
+keymap("n", "<leader>sg", ":lua require'telescope.builtin'.live_grep()<CR>", { desc = '[S]earch by [G]rep' })
+keymap("n", "<leader>sb", ":lua require'telescope.builtin'.buffers()<CR>", { desc = '[S]earch [B]uffer' })
+keymap("n", "<leader>sh", ":lua require'telescope.builtin'.help_tags()<CR>", { desc = '[S]earch [H]elp' })
+keymap("n", "<leader>sm", ":lua require('telescope').extensions.media_files.media_files()<CR>",
+  { desc = '[S]earch [M]edia' })
+keymap("n", "<leader>ss", ":lua require'telescope.builtin'.spell_suggest(require('telescope.themes').get_ivy())<CR>",
+  { desc = '[S]pell [S]uggest' })
+keymap('n', '<leader>sd', ":lua require('telescope.builtin').diagnostics()<CR>", { desc = '[S]earch [D]iagnostics' })
 
 -- Illuminate plugin --
 keymap('n', '<a-n>', ':lua require"illuminate".next_reference{wrap=true}<cr>', opts)
@@ -201,7 +239,6 @@ keymap('n', '<a-p>', ':lua require"illuminate".next_reference{reverse=true,wrap=
 -------------------------------------------------
 -- --> user defined functions
 -------------------------------------------------
-function remove_trailling_whitespaces ()
+function remove_trailling_whitespaces()
   vim.api.nvim_command("%s/\\s\\+$//e")
 end
-

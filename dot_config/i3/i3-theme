@@ -1,9 +1,0 @@
-#################################################
-# --> Theme: Window Colors
-#################################################
-#                       border              bg                  fg                  indicator
-client.focused          $bg-color-dark     $bg-color           $fg-color           $bg-color-indicator
-client.unfocused        $bg-color-inactive  $bg-color-inactive  $fg-color-inactive  $bg-color-indicator
-client.focused_inactive $bg-color-inactive  $bg-color-inactive  $fg-color-inactive  $bg-color-indicator
-client.urgent           $bg-color-urgent    $bg-color-urgent    $dark               $bg-color-indicator
-

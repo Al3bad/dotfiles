@@ -12,9 +12,9 @@ local autocmd = vim.api.nvim_create_autocmd -- Create autocommand
 -------------------------------------------------
 ----> Remove whitespace on save
 -------------------------------------------------
-local remove_whitespace_on_save_augroup = vim.api.nvim_create_augroup("RemoveWhitespaceOnSave", { clear = true })
-vim.api.nvim_create_autocmd("BufWritePre", {
-  pattern = "",
+local remove_whitespace_on_save_augroup = augroup("RemoveWhitespaceOnSave", { clear = true })
+autocmd("BufWritePre", {
+  pattern = { "*" },
   callback = function()
     -- Save current cursor position
     local save_cursor = vim.fn.getpos(".")
@@ -27,10 +27,10 @@ vim.api.nvim_create_autocmd("BufWritePre", {
 })
 
 -------------------------------------------------
-----> Fore indintation size to be 4 spaces in java files
+----> For indintation size to be 4 spaces in java & csharp files
 -------------------------------------------------
 autocmd("BufEnter", {
-  pattern = "*.java",
+  pattern = { "*.java", "*.csharp" },
   callback = function()
     vim.opt.shiftwidth = 4
   end,
@@ -40,7 +40,7 @@ autocmd("BufEnter", {
 ----> Ignore jump history when the mode is changed for snippets
 -------------------------------------------------
 local luasnip_fix_augroup = augroup("MyLuaSnipHistory", { clear = true })
-vim.api.nvim_create_autocmd("ModeChanged", {
+autocmd("ModeChanged", {
   pattern = "*",
   callback = function()
     if

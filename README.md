@@ -6,7 +6,7 @@ Terminal Emulator - [WezTerm](https://wezfurlong.org/wezterm/index.html)
 
 ![wezterm screenshot](images/wezterm.png)
 
-# Getting started
+# Installation
 
 1. Install [GNU strow](https://www.gnu.org/software/stow/)
 

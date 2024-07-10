@@ -1,4 +1,4 @@
-> NOTE: This report is managed by [GNU strow](https://www.gnu.org/software/stow/).
+> NOTE: This dotfiles repo is managed by [GNU strow](https://www.gnu.org/software/stow/).
 
 # Showcase
 

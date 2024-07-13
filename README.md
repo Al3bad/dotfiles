@@ -1,4 +1,4 @@
-> NOTE: This dotfiles repo is managed by [GNU strow](https://www.gnu.org/software/stow/).
+> NOTE: This dotfiles repo is managed by [GNU stow](https://www.gnu.org/software/stow/).
 
 # Showcase
 
@@ -8,11 +8,11 @@ Terminal Emulator - [WezTerm](https://wezfurlong.org/wezterm/index.html)
 
 # Installation
 
-1. Install [GNU strow](https://www.gnu.org/software/stow/)
+1. Install [GNU stow](https://www.gnu.org/software/stow/)
 
 ```bash
 # MacOS (using homebrew package manager)
-brew install strow
+brew install stow
 ```
 
 2. Clone this repo into your home directory
@@ -23,7 +23,7 @@ brew install strow
 git clone https://github.com/Al3bad/dotfiles.git
 ```
 
-3. Backup any config files that might be overwritten by `strow`.
+3. Backup any config files that might be overwritten by `stow`.
 
 4. Navigate to the cloned repo
 
@@ -31,8 +31,8 @@ git clone https://github.com/Al3bad/dotfiles.git
 cd dotfiles
 ```
 
-5. Put config files into your system using `strow`.
+5. Put config files into your system using `stow`.
 
 ```bash
-strow wezterm
+stow wezterm
 ```

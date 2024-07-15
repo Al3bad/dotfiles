@@ -41,5 +41,5 @@ cd dotfiles
 5. Put config files into your system using `stow`.
 
 ```bash
-stow wezterm tmux zsh fastfetch
+stow wezterm tmux zsh fastfetch neovim
 ```

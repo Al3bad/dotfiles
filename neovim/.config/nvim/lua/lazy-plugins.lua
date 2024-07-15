@@ -1,0 +1,21 @@
+---@type string|LazyConfig|LazyPluginSpec|LazySpecImport|string|LazyPluginSpec|LazySpecImport|string|LazyPluginSpec|LazySpecImport[][]
+require('lazy').setup {
+  require 'kickstart.plugins.theme',
+  require 'kickstart.plugins.indent-line',
+  require 'kickstart.plugins.fold',
+  require 'kickstart.plugins.mini',
+  require 'kickstart.plugins.autotag',
+  require 'kickstart.plugins.todo-comments',
+  require 'kickstart.plugins.treesitter',
+  'Issafalcon/lsp-overloads.nvim',
+  require 'kickstart.plugins.lspconfig',
+  require 'kickstart.plugins.illuminate',
+  require 'kickstart.plugins.conform',
+  require 'kickstart.plugins.cmp',
+  require 'kickstart.plugins.telescope',
+  require 'kickstart.plugins.file-explorer',
+  require 'kickstart.plugins.gitsigns',
+  require 'kickstart.plugins.discord-presence',
+  require 'kickstart.plugins.wakatime',
+  require 'kickstart.plugins.rest',
+}

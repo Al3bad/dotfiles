@@ -4,6 +4,8 @@
 
 ![screenshot1](images/screenshot1.png)
 
+![screenshot2](images/screenshot2.png)
+
 - Terminal Emulator - [WezTerm](https://wezfurlong.org/wezterm/index.html)
 - Terminal Multiplexer - [Tmux](https://github.com/tmux/tmux)
 - Shell - [Zsh](https://www.zsh.org)
@@ -12,6 +14,7 @@
   - [Vi mode plugin](https://github.com/jeffreytse/zsh-vi-mode)
 - Shell Prompt - [Starship](https://github.com/starship/starship)
 - Command-line System Info - [Fastfetch](https://github.com/fastfetch-cli/fastfetch)
+- Text Editor - [Neovim](https://neovim.io)
 
 # Installation
 

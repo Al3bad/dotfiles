@@ -19,7 +19,7 @@ autocmd('BufReadPost', {
     local exclude = { 'gitcommit' }
     local buf = event.buf
     if vim.tbl_contains(exclude, vim.bo[buf].filetype) or vim.b[buf].lazyvim_last_loc then
-      return
+      return ''
     end
     vim.b[buf].lazyvim_last_loc = true
     local mark = vim.api.nvim_buf_get_mark(buf, '"')

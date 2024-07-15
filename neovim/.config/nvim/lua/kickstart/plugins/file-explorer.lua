@@ -33,6 +33,7 @@ return {
       'echasnovski/mini.icons',
     },
     opts = {
+      show_statusline = false,
       sources = { 'filesystem', 'git_status', 'document_symbols' },
       open_files_do_not_replace_types = { 'terminal', 'Trouble', 'trouble', 'qf', 'Outline' },
       filesystem = {

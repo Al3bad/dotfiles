@@ -3,6 +3,8 @@ require('lazy').setup {
   require 'kickstart.plugins.theme',
   require 'kickstart.plugins.indent-line',
   require 'kickstart.plugins.fold',
+  require 'kickstart.plugins.noice',
+  require 'kickstart.plugins.lualine',
   require 'kickstart.plugins.mini',
   require 'kickstart.plugins.autotag',
   require 'kickstart.plugins.todo-comments',

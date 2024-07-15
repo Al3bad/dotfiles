@@ -21,12 +21,20 @@ return { -- Adds git related signs to the gutter, as well as utilities for manag
   'lewis6991/gitsigns.nvim',
   opts = {
     signs = {
-      add = { text = '▏' },
-      change = { text = '▏' },
+      add = { text = '┃' },
+      change = { text = '┃' },
       delete = { text = '' },
       topdelete = { text = '' },
-      changedelete = { text = '▏' },
-      untracked = { text = '▏' },
+      changedelete = { text = '┃' },
+      untracked = { text = '┆' },
+    },
+    signs_staged = {
+      add = { text = '┃' },
+      change = { text = '┃' },
+      delete = { text = '' },
+      topdelete = { text = '' },
+      changedelete = { text = '┃' },
+      untracked = { text = '┆' },
     },
     on_attach = function(buffer)
       local gs = package.loaded.gitsigns

@@ -12,17 +12,17 @@ return { -- Autoformat
     end,
     formatters_by_ft = {
       lua = { 'stylua' },
-      ['markdown'] = { { 'prettierd', 'prettier' }, 'markdownlint', 'markdown-toc' },
+      ['markdown'] = { 'prettierd', 'markdownlint', 'markdown-toc' },
       -- Conform can also run multiple formatters sequentially
       -- python = { "isort", "black" },
       --
-      yaml = { { 'prettierd', 'prettier' } },
-      html = { { 'prettierd', 'prettier' } },
-      css = { { 'prettierd', 'prettier' } },
-      javascript = { { 'prettierd', 'prettier' } },
-      typescript = { { 'prettierd', 'prettier' } },
-      javascriptreact = { { 'prettierd', 'prettier' } },
-      typescriptreact = { { 'prettierd', 'prettier' } },
+      yaml = { 'prettierd' },
+      html = { 'prettierd' },
+      css = { 'prettierd' },
+      javascript = { 'prettierd' },
+      typescript = { 'prettierd' },
+      javascriptreact = { 'prettierd' },
+      typescriptreact = { 'prettierd' },
     },
   },
 }

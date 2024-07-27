@@ -3,6 +3,11 @@ return { -- Highlight, edit, and navigate code
   {
     'nvim-treesitter/nvim-treesitter',
     build = ':TSUpdate',
+    dependencies = {
+      'nvim-treesitter/nvim-treesitter-textobjects',
+      'folke/ts-comments.nvim',
+      'windwp/nvim-ts-autotag',
+    },
     config = function()
       ---@diagnostic disable-next-line: missing-fields
       require('nvim-treesitter.configs').setup {
@@ -24,16 +29,34 @@ return { -- Highlight, edit, and navigate code
           select = {
             enable = true,
             lookahead = true,
+            -- include_surrounding_whitespace = true,
             keymaps = {
               ['af'] = { query = '@function.outer', desc = 'Select [A]round [F]unction' },
               ['if'] = { query = '@function.inner', desc = 'Select [I]nner [F]unction' },
-              ['ac'] = { query = '@class.outer', desc = 'Select [A]round [C]lass' },
-              ['ic'] = { query = '@class.inner', desc = 'Select [I]nner [C]lass' },
               ['ab'] = { query = '@block.outer', desc = 'Select [A]round [B]lock' },
               ['ib'] = { query = '@block.inner', desc = 'Select [I]nner [B]lock' },
-              ['as'] = { query = '@scope', query_group = 'locals', desc = 'Select [A]round [S]cope' },
+              ['ac'] = { query = '@comment.outer', desc = 'Select [A]round [C]omment' },
             },
-            include_surrounding_whitespace = true,
+          },
+          move = {
+            enable = true,
+            set_jumps = true,
+            goto_next_start = {
+              [']f'] = '@function.outer',
+              [']c'] = '@comment.outer',
+            },
+            goto_next_end = {
+              [']F'] = '@function.outer',
+              [']C'] = '@comment.outer',
+            },
+            goto_previous_start = {
+              ['[f'] = '@function.outer',
+              ['[c'] = '@comment.outer',
+            },
+            goto_previous_end = {
+              ['[F'] = '@function.outer',
+              ['[C'] = '@comment.outer',
+            },
           },
         },
       }
@@ -52,8 +75,7 @@ return { -- Highlight, edit, and navigate code
   {
     'windwp/nvim-ts-autotag',
     opts = {
-      enable_close = true, -- Auto close tags
-      enable_rename = true, -- Auto rename pairs of tags
+      enable = true,
     },
   },
 }

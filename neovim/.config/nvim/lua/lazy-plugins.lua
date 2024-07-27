@@ -6,7 +6,6 @@ require('lazy').setup {
   require 'kickstart.plugins.noice',
   require 'kickstart.plugins.lualine',
   require 'kickstart.plugins.mini',
-  require 'kickstart.plugins.autotag',
   require 'kickstart.plugins.todo-comments',
   require 'kickstart.plugins.treesitter',
   'Issafalcon/lsp-overloads.nvim',

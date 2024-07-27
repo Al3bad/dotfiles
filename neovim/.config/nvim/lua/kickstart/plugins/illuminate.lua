@@ -20,7 +20,7 @@ return {
 
     local function map(key, dir, buffer)
       vim.keymap.set('n', key, function()
-        illuminate['goto_' .. dir .. '_reference'] { wrap = true }
+        illuminate['goto_' .. dir .. '_reference'](true)
       end, { desc = dir:sub(1, 1):upper() .. dir:sub(2) .. ' Reference', buffer = buffer })
     end
 

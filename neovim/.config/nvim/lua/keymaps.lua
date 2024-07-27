@@ -36,6 +36,17 @@ keymap('n', '<leader>ur', '<cmd>noh<cr><cmd>redraw<cr><c-l>', { desc = 'Redraw a
 -- Clear highlight search on pressing <Esc> in normal mode
 keymap('n', '<Esc>', '<cmd>nohlsearch<CR>')
 
+-- Toggle autoformatting
+keymap('n', '<leader>uf', function()
+  if vim.g.disable_autoformat then
+    print 'Enable autosave'
+    vim.g.disable_autoformat = false
+  else
+    print 'Disable autosave'
+    vim.g.disable_autoformat = true
+  end
+end, { desc = 'Toggle autoformat-on-save (all buffers)' })
+
 --------------------------------------------------
 -- Misc
 --------------------------------------------------

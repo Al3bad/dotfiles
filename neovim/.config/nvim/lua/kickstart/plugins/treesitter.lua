@@ -1,5 +1,5 @@
----@type string|LazyConfig|LazyPluginSpec|LazySpecImport|string|LazyPluginSpec|LazySpecImport|string|LazyPluginSpec|LazySpecImport[][]
 return { -- Highlight, edit, and navigate code
+  ---@type string|LazyConfig|LazyPluginSpec|LazySpecImport|string|LazyPluginSpec|LazySpecImport|string|LazyPluginSpec|LazySpecImport[][]
   {
     'nvim-treesitter/nvim-treesitter',
     build = ':TSUpdate',
@@ -39,11 +39,21 @@ return { -- Highlight, edit, and navigate code
       }
     end,
   },
+  ---@type string|LazyConfig|LazyPluginSpec|LazySpecImport|string|LazyPluginSpec|LazySpecImport|string|LazyPluginSpec|LazySpecImport[][]
   { 'nvim-treesitter/nvim-treesitter-textobjects' },
+  ---@type string|LazyConfig|LazyPluginSpec|LazySpecImport|string|LazyPluginSpec|LazySpecImport|string|LazyPluginSpec|LazySpecImport[][]
   {
     'folke/ts-comments.nvim',
     opts = {},
     event = 'VeryLazy',
     enabled = vim.fn.has 'nvim-0.10.0' == 1,
+  },
+  ---@type string|LazyConfig|LazyPluginSpec|LazySpecImport|string|LazyPluginSpec|LazySpecImport|string|LazyPluginSpec|LazySpecImport[][]
+  {
+    'windwp/nvim-ts-autotag',
+    opts = {
+      enable_close = true, -- Auto close tags
+      enable_rename = true, -- Auto rename pairs of tags
+    },
   },
 }

@@ -7,7 +7,7 @@ local function setupKeys(gs, map)
   map({ 'n', 'v' }, '<leader>gS', ':Gitsigns stage_hunk<CR>', '[G]it [H]unk [S]tage')
   map({ 'n', 'v' }, '<leader>gR', ':Gitsigns reset_hunk<CR>', '[G]it [H]unk [R]eset')
   map('n', '<leader>gu', gs.undo_stage_hunk, '[G]it [H]unk [U]ndo')
-  map('n', '<leader>gp', gs.preview_hunk_inline, '[G]it [H]unk [P]review Inline')
+  map('n', '<leader>gp', gs.preview_hunk, '[G]it [H]unk [P]review')
   map('n', '<leader>gb', function()
     gs.blame_line { full = true }
   end, '[G]it [H]unk [B]lame Line')

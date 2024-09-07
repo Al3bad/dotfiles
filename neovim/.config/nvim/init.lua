@@ -8,6 +8,9 @@ require 'options'
 -- [[ Basic Keymaps ]]
 require 'keymaps'
 
+-- [[ User Defined Commands ]]
+require 'usercmd'
+
 -- [[ Basic Autocommands ]]
 require 'autocmd'
 

@@ -26,6 +26,12 @@ keymap('n', ']b', '<cmd>bn<cr>', { desc = 'Next buffer', silent = true })
 keymap('n', '<S-h>', '<cmd>bp<cr>', { desc = 'Previous buffer', silent = true })
 keymap('n', '[b', '<cmd>bp<cr>', { desc = 'Previous buffer', silent = true })
 
+-- Resize window using <ctrl> arrow keys
+keymap('n', '<C-Up>', '<cmd>resize +2<cr>', { desc = 'Increase Window Height' })
+keymap('n', '<C-Down>', '<cmd>resize -2<cr>', { desc = 'Decrease Window Height' })
+keymap('n', '<C-Left>', '<cmd>vertical resize -2<cr>', { desc = 'Decrease Window Width' })
+keymap('n', '<C-Right>', '<cmd>vertical resize +2<cr>', { desc = 'Increase Window Width' })
+
 --------------------------------------------------
 -- UI
 --------------------------------------------------

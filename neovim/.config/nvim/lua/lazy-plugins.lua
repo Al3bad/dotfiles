@@ -1,5 +1,7 @@
 ---@type string|LazyConfig|LazyPluginSpec|LazySpecImport|string|LazyPluginSpec|LazySpecImport|string|LazyPluginSpec|LazySpecImport[][]
 require('lazy').setup {
+  'tpope/vim-repeat',
+  require 'kickstart.plugins.lazydev',
   require 'kickstart.plugins.theme',
   require 'kickstart.plugins.indent-line',
   require 'kickstart.plugins.fold',
@@ -14,9 +16,12 @@ require('lazy').setup {
   require 'kickstart.plugins.conform',
   require 'kickstart.plugins.cmp',
   require 'kickstart.plugins.telescope',
+  require 'kickstart.plugins.harpoon',
   require 'kickstart.plugins.file-explorer',
+  require 'kickstart.plugins.search-and-replace',
   require 'kickstart.plugins.gitsigns',
   require 'kickstart.plugins.discord-presence',
   require 'kickstart.plugins.wakatime',
   require 'kickstart.plugins.rest',
+  { import = 'custom.plugins' },
 }

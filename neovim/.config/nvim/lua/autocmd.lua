@@ -41,15 +41,24 @@ autocmd('FileType', {
 })
 
 -- Set indentation options for different file types
-autocmd('FileType', {
-  pattern = { 'javascript', 'typescript', 'javascriptreact', 'typescriptreact' },
-  group = augroup('WorkTabWidth', { clear = true }),
-  callback = function()
-    local path = vim.api.nvim_buf_get_name(0)
-    if path:match(vim.fn.expand '$HOME' .. '/work') then
-      vim.opt_local.tabstop = 4
-      vim.opt_local.shiftwidth = 4
-      vim.opt_local.softtabstop = 4
-    end
-  end,
-})
+-- autocmd('FileType', {
+--   pattern = { 'javascript', 'typescript', 'javascriptreact', 'typescriptreact' },
+--   group = augroup('WorkTabWidth', { clear = true }),
+--   callback = function()
+--     local path = vim.api.nvim_buf_get_name(0)
+--     if path:match(vim.fn.expand '$HOME' .. '/work') then
+--       vim.opt_local.tabstop = 4
+--       vim.opt_local.shiftwidth = 4
+--       vim.opt_local.softtabstop = 4
+--     end
+--   end,
+-- })
+
+-- vim.api.nvim_create_autocmd('FileType', {
+--   pattern = { 'git', 'gitsigns_blame', 'git-blame', 'gitcommit', 'gitrebase', 'gitsendemail' },
+--   callback = function()
+--     vim.opt_local.foldenable = false
+--     vim.opt_local.foldcolumn = '0'
+--     require('ufo').detach()
+--   end,
+-- })

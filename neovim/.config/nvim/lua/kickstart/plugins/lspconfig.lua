@@ -47,6 +47,7 @@ local function setupDiagnostic()
     virtual_text = false,
     underline = false,
     signs = true,
+    float = { border = 'single' },
     -- update_in_insert = false,
     -- severity_sort = false,
   }
@@ -131,6 +132,9 @@ local function ensureLspServerInstall(servers, capabilities)
     handlers = {
       function(server_name)
         local server = servers[server_name] or {}
+        if server_name == 'tsserver' then
+          server_name = 'ts_ls'
+        end
         -- This handles overriding only values explicitly passed
         -- by the server configuration above. Useful when disabling
         -- certain features of an LSP (for example, turning off formatting for tsserver)
@@ -201,7 +205,7 @@ return { -- LSP Configuration & Plugins
     -- --        For example, to see the options for `lua_ls`, you could go to: https://luals.github.io/wiki/settings/
     local servers = {
       -- Typescript
-      tsserver = {},
+      vtsls = {},
       -- Prettier formatter
       prettierd = {},
       -- markdown

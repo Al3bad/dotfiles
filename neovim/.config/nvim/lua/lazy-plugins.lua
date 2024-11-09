@@ -4,6 +4,7 @@ require('lazy').setup {
   require 'kickstart.plugins.lazydev',
   require 'kickstart.plugins.theme',
   require 'kickstart.plugins.indent-line',
+  require 'kickstart.plugins.indent-guess',
   require 'kickstart.plugins.fold',
   require 'kickstart.plugins.noice',
   require 'kickstart.plugins.lualine',

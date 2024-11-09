@@ -8,11 +8,25 @@ return {
   opts = {
     options = { transparency = true },
     filetypes = { all = false },
-    colors = { comment = '#60646c' },
+    colors = {
+      -- Make comment darker
+      comment = '#60646c',
+      -- Custom colours for diffview
+      CustomDiffAdd = '#28372f',
+      CustomDiffChange = '#253e43',
+      CustomDiffDelete = '#412e2f',
+    },
+    highlights = {
+      -- Use custom colours for diffview
+      DiffAdd = { bg = '${CustomDiffAdd}' },
+      DiffChange = { bg = '${CustomDiffChange}' },
+      DiffDelete = { bg = '${CustomDiffDelete}' },
+    },
   },
   config = function(_, opts)
     require('onedarkpro').setup(opts)
     vim.cmd.colorscheme 'onedark'
     vim.cmd.hi 'Comment gui=none'
+    vim.opt.fillchars:append 'diff: '
   end,
 }

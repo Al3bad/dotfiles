@@ -4,6 +4,7 @@ if [ -x "$(command -v brew)" ] && [ $(uname -s) = "Darwin" ]; then
     # MacOS only
     BREW_PREFIX=$(brew --prefix)
     FPATH=$BREW_PREFIX/share/zsh-completions:$FPATH
+    FPATH=$BREW_PREFIX/share/zsh/site-functions:$FPATH
     sourceIfExist $BREW_PREFIX/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
     sourceIfExist $BREW_PREFIX/share/zsh-autosuggestions/zsh-autosuggestions.zsh
     sourceIfExist $BREW_PREFIX/opt/zsh-vi-mode/share/zsh-vi-mode/zsh-vi-mode.plugin.zsh

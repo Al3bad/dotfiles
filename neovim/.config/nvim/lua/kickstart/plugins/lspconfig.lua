@@ -186,7 +186,7 @@ return { -- LSP Configuration & Plugins
         --   end
         -- end
         -- Python stuff
-        if client.name == 'ruff_lsp' then
+        if client.name == 'ruff' then
           -- Disable hover in favor of Pyright
           client.server_capabilities.hoverProvider = false
         end
@@ -237,7 +237,7 @@ return { -- LSP Configuration & Plugins
       -- python lsp
       pyright = {},
       -- python linter
-      ruff_lsp = {},
+      ruff = {},
       -- c/cpp
       clangd = {
         cmd = {

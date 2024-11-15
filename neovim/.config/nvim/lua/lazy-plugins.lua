@@ -13,6 +13,11 @@ require('lazy').setup {
   require 'kickstart.plugins.treesitter',
   'Issafalcon/lsp-overloads.nvim',
   require 'kickstart.plugins.lspconfig',
+  {
+    'pmizio/typescript-tools.nvim',
+    dependencies = { 'nvim-lua/plenary.nvim', 'neovim/nvim-lspconfig' },
+    opts = {},
+  },
   require 'kickstart.plugins.illuminate',
   require 'kickstart.plugins.conform',
   require 'kickstart.plugins.cmp',

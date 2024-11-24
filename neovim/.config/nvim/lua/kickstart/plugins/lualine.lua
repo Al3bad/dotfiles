@@ -71,21 +71,7 @@ return {
             { 'branch', icon = { '' }, padding = { right = 2, left = 2 } },
           },
           lualine_c = {
-            { 'filetype', icon_only = true, separator = '', padding = { left = 1, right = 0 } },
-            {
-              'filename',
-              symbols = { modified = '', readonly = '' },
-              file_status = true,
-              newfile_status = true,
-              path = 1,
-              padding = { left = 0, right = 2 },
-              color = { fg = colors.gray },
-            },
-            {
-              require('tmux-status').tmux_windows,
-              cond = require('tmux-status').show,
-              padding = { left = 2 },
-            },
+            { require('tmux-status').tmux_windows, cond = require('tmux-status').show, padding = { left = 2 } },
           },
           lualine_x = {
             {

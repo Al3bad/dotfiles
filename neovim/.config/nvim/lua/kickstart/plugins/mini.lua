@@ -21,6 +21,24 @@ return { -- Collection of various small independent plugins/modules
       },
     }
 
+    require('mini.bracketed').setup {
+      buffer = { suffix = 'b', options = {} },
+      comment = { suffix = 'c', options = {} },
+      diagnostic = { suffix = 'd', options = {} },
+      quickfix = { suffix = 'q', options = {} },
+      yank = { suffix = 'y', options = {} },
+      -- Disable
+      conflict = { suffix = '', options = {} },
+      file = { suffix = '', options = {} },
+      indent = { suffix = '', options = {} },
+      jump = { suffix = '', options = {} },
+      location = { suffix = '', options = {} },
+      oldfile = { suffix = '', options = {} },
+      treesitter = { suffix = '', options = {} },
+      undo = { suffix = '', options = {} },
+      window = { suffix = '', options = {} },
+    }
+
     -- Better Around/Inside textobjects
     --  - va)  - [V]isually select [A]round [)]parenthen
     --  - yinq - [Y]ank [I]nside [N]ext [']quote

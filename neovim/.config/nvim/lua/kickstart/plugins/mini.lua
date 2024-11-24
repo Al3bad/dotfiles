@@ -64,18 +64,6 @@ return { -- Collection of various small independent plugins/modules
       },
     }
 
-    require('mini.indentscope').setup {
-      mappings = {
-        -- Textobjects
-        object_scope = 'ii',
-        object_scope_with_border = 'ai',
-        -- Motions (jump to respective border line; if not present - body line)
-        goto_top = '[i',
-        goto_bottom = ']i',
-      },
-      symbol = '│',
-    }
-
     local hipatterns = require 'mini.hipatterns'
     hipatterns.setup {
       highlighters = {
